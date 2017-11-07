@@ -1,3 +1,5 @@
+package tutorial.java.generics.examples;
+
 import java.util.List;
 
 public class WildcardFixed {

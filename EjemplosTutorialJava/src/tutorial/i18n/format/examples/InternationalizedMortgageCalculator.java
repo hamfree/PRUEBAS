@@ -1,3 +1,5 @@
+package tutorial.i18n.format.examples;
+
 
 
 import java.awt.BorderLayout;

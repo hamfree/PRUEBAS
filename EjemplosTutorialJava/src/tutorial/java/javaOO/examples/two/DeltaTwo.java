@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package two;
+package tutorial.java.javaOO.examples.two;
 import one.*;
 
 public class DeltaTwo {

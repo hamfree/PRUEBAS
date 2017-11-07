@@ -1,3 +1,5 @@
+package tutorial.i18n.locale.examples;
+
 /*
  * Copyright (c) 1995, 2011, Oracle and/or its affiliates. All rights reserved.
  *

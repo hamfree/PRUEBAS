@@ -29,9 +29,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dictionary;
+package tutorial.ext.basics.examples.DictionaryServiceDemo.DictionaryDemo.src.dictionary;
 
-import dictionary.DictionaryService;
+import tutorial.ext.basics.examples.DictionaryServiceDemo.DictionaryServiceProvider.src.dictionary.DictionaryService;
 
 public class DictionaryDemo {
 

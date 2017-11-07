@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dictionary.spi;
+package tutorial.ext.basics.examples.DictionaryServiceDemo.DictionaryServiceProvider.src.dictionary.spi;
 
 public interface Dictionary {
     public String getDefinition(String word);

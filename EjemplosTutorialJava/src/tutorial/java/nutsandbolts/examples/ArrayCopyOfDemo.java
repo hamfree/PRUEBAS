@@ -1,3 +1,5 @@
+package tutorial.java.nutsandbolts.examples;
+
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  *

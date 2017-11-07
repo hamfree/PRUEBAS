@@ -1,3 +1,5 @@
+package tutorial.essential.exceptions.examples;
+
 /*
  * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
  *
@@ -27,33 +29,42 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */ 
+ */
 
 // Note: This class won't compile by design!
 // See InputFileDeclared.java for a version of this
 // class that will compile.
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InputFile {
 
     private FileReader in;
 
     public InputFile(String filename) {
-        in = new FileReader(filename);
+        try {
+            in = new FileReader(filename);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(InputFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String getWord() {
         int c;
         StringBuffer buf = new StringBuffer();
-
-        do {
-            c = in.read();
-            if (Character.isWhitespace((char)c))
-                return buf.toString();
-            else
-                buf.append((char)c);
-        } while (c != -1);
-
+        try {
+            do {
+                c = in.read();
+                if (Character.isWhitespace((char) c)) {
+                    return buf.toString();
+                } else {
+                    buf.append((char) c);
+                }
+            } while (c != -1);
+        } catch (IOException ex) {
+            Logger.getLogger(InputFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return buf.toString();
     }
 }

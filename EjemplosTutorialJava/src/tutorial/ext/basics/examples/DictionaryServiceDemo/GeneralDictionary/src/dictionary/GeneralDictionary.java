@@ -29,9 +29,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dictionary;
+package tutorial.ext.basics.examples.DictionaryServiceDemo.GeneralDictionary.src.dictionary;
 
-import dictionary.spi.Dictionary;
+import tutorial.ext.basics.examples.DictionaryServiceDemo.DictionaryServiceProvider.src.dictionary.spi.Dictionary;
 import java.util.SortedMap;
 import java.util.TreeMap;
 

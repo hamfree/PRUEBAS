@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package rbcp;
+package tutorial.i18n.serviceproviders.examples.rbcpsample.src.rbcp;
 
 import java.io.*;
 import java.net.*;

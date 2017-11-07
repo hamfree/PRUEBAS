@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package one;
+package tutorial.java.javaOO.examples.one;
 
 public class DeltaOne {
     public static void main(String[] args) {
