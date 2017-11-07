@@ -1,3 +1,5 @@
+package tutorial.collections.streams.examples;
+
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  *

@@ -1,4 +1,4 @@
-package defaultmethods;
+package tutorial.java.IandI.examples.defaultmethods;
 
 import java.util.*;
 import java.util.stream.*;

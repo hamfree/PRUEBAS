@@ -1,3 +1,5 @@
+package tutorial.collections.interfaces.examples;
+
 /*
 * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
 *

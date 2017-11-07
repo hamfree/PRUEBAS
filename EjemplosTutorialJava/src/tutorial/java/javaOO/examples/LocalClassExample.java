@@ -1,3 +1,5 @@
+package tutorial.java.javaOO.examples;
+
 /*
  * Copyright (c) 2013, 2014, Oracle and/or its affiliates. All rights reserved.
  *

@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package defaultmethods; 
+package tutorial.java.IandI.examples.defaultmethods; 
  
 import java.util.*;
 import java.util.stream.*;

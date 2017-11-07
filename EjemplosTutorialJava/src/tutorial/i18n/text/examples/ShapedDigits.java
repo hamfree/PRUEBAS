@@ -1,3 +1,5 @@
+package tutorial.i18n.text.examples;
+
 /*
  * Copyright (c) 2011, Oracle and/or its affiliates. All rights reserved.
  *

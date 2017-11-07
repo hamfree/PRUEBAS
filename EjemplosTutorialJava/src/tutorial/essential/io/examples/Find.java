@@ -1,3 +1,5 @@
+package tutorial.essential.io.examples;
+
 /*
  * Copyright (c) 2009, Oracle and/or its affiliates. All rights reserved.
  *

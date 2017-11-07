@@ -1,3 +1,5 @@
+package tutorial.java.generics.examples;
+
 /*
  * Copyright (c) 1995, 2010, Oracle and/or its affiliates. All rights reserved.
  *
