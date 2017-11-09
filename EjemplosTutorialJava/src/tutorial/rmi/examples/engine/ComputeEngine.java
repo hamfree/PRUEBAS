@@ -29,14 +29,14 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package engine;
+package tutorial.rmi.examples.engine;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import compute.Compute;
-import compute.Task;
+import tutorial.rmi.examples.compute.Compute;
+import tutorial.rmi.examples.compute.Task;
 
 public class ComputeEngine implements Compute {
 

@@ -1,4 +1,4 @@
-package tutorial.reflect.member.example;
+package tutorial.reflect.clase.example;
 
 /*
  * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
@@ -31,67 +31,77 @@ package tutorial.reflect.member.example;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-import java.util.Locale;
+import java.lang.reflect.Member;
 import static java.lang.System.out;
-import static java.lang.System.err;
 
-public class Deet<T> {
-    private boolean testDeet(Locale l) {
-	// getISO3Language() may throw a MissingResourceException
-	out.format("Locale = %s, ISO Language Code = %s%n", l.getDisplayName(), l.getISO3Language());
-	return true;
-    }
+enum ClassMember { CONSTRUCTOR, FIELD, METHOD, CLASS, ALL }
 
-    private int testFoo(Locale l) { return 0; }
-    private boolean testBar() { return true; }
-
+public class ClassSpy {
     public static void main(String... args) {
-	if (args.length != 4) {
-	    err.format("Usage: java Deet <classname> <langauge> <country> <variant>%n");
-	    return;
-	}
-
 	try {
 	    Class<?> c = Class.forName(args[0]);
-	    Object t = c.newInstance();
+	    out.format("Class:%n  %s%n%n", c.getCanonicalName());
 
-	    Method[] allMethods = c.getDeclaredMethods();
-	    for (Method m : allMethods) {
-		String mname = m.getName();
-		if (!mname.startsWith("test")
-		    || (m.getGenericReturnType() != boolean.class)) {
-		    continue;
-		}
- 		Type[] pType = m.getGenericParameterTypes();
- 		if ((pType.length != 1)
-		    || Locale.class.isAssignableFrom(pType[0].getClass())) {
- 		    continue;
- 		}
+	    Package p = c.getPackage();
+	    out.format("Package:%n  %s%n%n",
+		       (p != null ? p.getName() : "-- No Package --"));
 
-		out.format("invoking %s()%n", mname);
-		try {
-		    m.setAccessible(true);
-		    Object o = m.invoke(t, new Locale(args[1], args[2], args[3]));
-		    out.format("%s() returned %b%n", mname, (Boolean) o);
-
-		// Handle any exceptions thrown by method to be invoked.
-		} catch (InvocationTargetException x) {
-		    Throwable cause = x.getCause();
-		    err.format("invocation of %s failed: %s%n",
-			       mname, cause.getMessage());
+	    for (int i = 1; i < args.length; i++) {
+		switch (ClassMember.valueOf(args[i])) {
+		case CONSTRUCTOR:
+		    printMembers(c.getConstructors(), "Constructor");
+		    break;
+		case FIELD:
+		    printMembers(c.getFields(), "Fields");
+		    break;
+		case METHOD:
+		    printMembers(c.getMethods(), "Methods");
+		    break;
+		case CLASS:
+		    printClasses(c);
+		    break;
+		case ALL:
+		    printMembers(c.getConstructors(), "Constuctors");
+		    printMembers(c.getFields(), "Fields");
+		    printMembers(c.getMethods(), "Methods");
+		    printClasses(c);
+		    break;
+		default:
+		    assert false;
 		}
 	    }
 
         // production code should handle these exceptions more gracefully
 	} catch (ClassNotFoundException x) {
 	    x.printStackTrace();
-	} catch (InstantiationException x) {
-	    x.printStackTrace();
-	} catch (IllegalAccessException x) {
-	    x.printStackTrace();
 	}
+    }
+
+    private static void printMembers(Member[] mbrs, String s) {
+	out.format("%s:%n", s);
+	for (Member mbr : mbrs) {
+	    if (mbr instanceof Field)
+		out.format("  %s%n", ((Field)mbr).toGenericString());
+	    else if (mbr instanceof Constructor)
+		out.format("  %s%n", ((Constructor)mbr).toGenericString());
+	    else if (mbr instanceof Method)
+		out.format("  %s%n", ((Method)mbr).toGenericString());
+	}
+	if (mbrs.length == 0)
+	    out.format("  -- No %s --%n", s);
+	out.format("%n");
+    }
+
+    private static void printClasses(Class<?> c) {
+	out.format("Classes:%n");
+	Class<?>[] clss = c.getClasses();
+	for (Class<?> cls : clss)
+	    out.format("  %s%n", cls.getCanonicalName());
+	if (clss.length == 0)
+	    out.format("  -- No member interfaces, classes, or enums --%n");
+	out.format("%n");
     }
 }

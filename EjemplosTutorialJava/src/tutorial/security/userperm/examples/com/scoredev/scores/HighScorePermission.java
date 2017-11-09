@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package com.scoredev.scores;
+package tutorial.security.userperm.examples.com.scoredev.scores;
 
 import java.security.*;
 

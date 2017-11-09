@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package compute;
+package tutorial.rmi.examples.compute;
 
 public interface Task<T> {
     T execute();
