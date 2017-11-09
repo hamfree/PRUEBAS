@@ -1,3 +1,5 @@
+package tutorial.networking.nifs.examples;
+
 /*
  * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
  *

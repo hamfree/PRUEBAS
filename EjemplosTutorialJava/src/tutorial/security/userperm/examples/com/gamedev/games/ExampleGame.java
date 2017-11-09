@@ -29,12 +29,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package com.gamedev.games;
+package tutorial.security.userperm.examples.com.gamedev.games;
 
 import java.io.*;
 import java.security.*;
 import java.util.Hashtable;
 import com.scoredev.scores.*;
+import tutorial.security.userperm.examples.com.scoredev.scores.HighScore;
 
 public class ExampleGame
 {

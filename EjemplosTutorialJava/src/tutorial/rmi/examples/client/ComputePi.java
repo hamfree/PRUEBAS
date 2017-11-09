@@ -29,12 +29,12 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package client;
+package tutorial.rmi.examples.client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.math.BigDecimal;
-import compute.Compute;
+import tutorial.rmi.examples.compute.Compute;
 
 public class ComputePi {
     public static void main(String args[]) {

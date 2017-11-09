@@ -29,9 +29,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package client;
+package tutorial.rmi.examples.client;
 
-import compute.Task;
+import tutorial.rmi.examples.compute.Task;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
