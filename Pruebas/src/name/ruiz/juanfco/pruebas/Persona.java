@@ -1,29 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package name.ruiz.juanfco.pruebas;
 
 import java.util.Objects;
 
 /**
+ * Objeto que representa una persona
  *
  * @author juanf
  */
-public class A {
+public class Persona {
 
     private String nombre;
     private String apellidos;
     private Integer edad;
 
-    public A() {
+    public Persona() {
         this.apellidos = "";
         this.nombre = "";
         this.edad = 0;
     }
 
-    public A(String nombre, String apellidos, Integer edad) {
+    public Persona(String nombre, String apellidos, Integer edad) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
@@ -73,7 +69,7 @@ public class A {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final A other = (A) obj;
+        final Persona other = (Persona) obj;
         if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
@@ -88,7 +84,8 @@ public class A {
 
     @Override
     public String toString() {
-        return "A{" + "nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + '}';
+        return "Persona{" + "nombre='" + nombre + "', apellidos='" + apellidos + "', edad=" + edad + '}';
     }
+
 
 }
