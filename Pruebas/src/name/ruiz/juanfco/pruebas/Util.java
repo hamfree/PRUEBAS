@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package name.ruiz.juanfco.pruebas;
 
 import java.io.Console;
@@ -12,9 +7,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 import java.util.SortedMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +16,15 @@ import java.util.logging.Logger;
  */
 public class Util {
 
+    public final String SL = System.getProperty("line.separator");
+    public final String SF = System.getProperty("file.separator");
+
+    // Métodos de utilidad
+    /**
+     *
+     * @param obj
+     * @return
+     */
     public static boolean isNullOrEmpty(Object obj) {
         if (obj == null) {
             return true;
@@ -49,31 +52,93 @@ public class Util {
         return false;
     }
 
-    void imp(boolean usaConsola, Object... args) throws Exception {
-
+    /**
+     * Imprime los argumentos indicados en la salida estándar. Puede usar el objeto Console si se pasa true al parámetro usaConsola.
+     * En caso contrario usara el canal estandar de salida.
+     *
+     * @param usaConsola booleano que si es true intentará usar Console.
+     * @param args una lista de objetos a imprimir
+     * @throws Exception en caso de pasar parámetros nulos.
+     */
+    public static void imp(boolean usaConsola, Object... args) throws Exception {
         StringBuilder sb = new StringBuilder();
-        String cadena = null;
         if (args == null) {
             throw new Exception("¡Parámetros nulos!");
         } else {
             for (Object arg : args) {
                 sb.append(arg.toString());
             }
-            cadena = sb.toString();
         }
         if (usaConsola) {
             Console con = System.console();
             if (con == null) {
-                throw new Exception("No se puede acceder a la consola.");
+                System.out.format("%s", sb.toString());
             } else {
-                con.printf("%s", cadena);
+                con.printf("%s", sb.toString());
             }
         } else {
-            System.out.format("%s", cadena);
+            System.out.format("%s", sb.toString());
         }
     }
 
-    List<Charset> verConjuntosCaracteresDisponibles() {
+    /**
+     *
+     * @param usaConsola
+     * @return
+     * @throws java.lang.Exception
+     */
+    public static String read(boolean usaConsola) throws Exception {
+        String dato = "";
+        if (usaConsola) {
+            Console con = System.console();
+            if (con == null) {
+                Scanner sc = new Scanner(System.in);
+                dato = sc.nextLine();
+            } else {
+                dato = con.readLine();
+            }
+        }
+        return dato;
+    }
+
+    /**
+     *
+     * @param dato
+     * @return
+     */
+    public boolean isInteger(String dato) {
+        if (!isNullOrEmpty(dato)) {
+            try {
+                int tmp = Integer.parseInt(dato);
+                return true;
+            } catch (NumberFormatException ex) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param dato
+     * @return
+     */
+    public boolean isDouble(String dato) {
+        if (!isNullOrEmpty(dato)) {
+            try {
+                double tmp = Double.parseDouble(dato);
+            } catch (NumberFormatException ex) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Charset> getAllCharsets() {
         SortedMap<String, Charset> sm;
         ArrayList<Charset> al = null;
         sm = Charset.availableCharsets();
@@ -87,4 +152,5 @@ public class Util {
         }
         return al;
     }
+
 }

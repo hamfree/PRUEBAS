@@ -14,7 +14,8 @@ public class LeerUnFicheroLineaALinea {
     }
 
     public void read() throws IOException {
-        try (Stream<String> lines = lines(get("file.txt"), StandardCharsets.UTF_8)) { // can be used Charset.defaultCharset()
+        try (Stream<String> lines = lines(get("file.txt"), StandardCharsets.UTF_8)) {
+            // can be used Charset.defaultCharset()
             lines.forEachOrdered(line -> process(line));    // can be used for unordered lines.forEach
         }
     }
