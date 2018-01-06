@@ -1,4 +1,4 @@
-### NetBeans ###
+### gitignore para NetBeans (issue 1) ###
 nbproject/private/
 build/
 nbbuild/
@@ -7,4 +7,4 @@ nbdist/
 .nb-gradle/
 nbactions.xml
 
-# End of https://www.gitignore.io/api/maven,netbeans
+# Fin de https://www.gitignore.io/api/maven,netbeans
