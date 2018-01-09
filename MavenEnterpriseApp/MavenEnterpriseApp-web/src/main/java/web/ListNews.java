@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package web;
 
 import ejb.NewsEntity;
@@ -44,12 +38,13 @@ public class ListNews extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             out.println("<!DOCTYPE html>");
-            out.println("<html>");
+            out.println("<html lang=\"es\">");
             out.println("<head>");
-            out.println("<title>Servlet ListNews</title>");            
+            out.println("<title>Servlet Listador de Noticias</title>");
+            out.println("<meta charset=\"utf-8\">");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListNews at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Listador de Noticias en la URL: " + request.getContextPath() + "</h1>");
             
             List news = newsEntityFacade.findAll();
             for (Iterator it = news.iterator();it.hasNext();){
@@ -57,7 +52,7 @@ public class ListNews extends HttpServlet {
                 out.println(" <b>" + elem.getTitle() + " </b><br />");
                 out.println(elem.getBody() + "<br />");
             }
-            out.println("<a href='PostMessage'>Add new message</a>");
+            out.println("<a href='PostMessage'>Agrega un nuevo mensaje</a>");
             
             out.println("</body>");
             out.println("</html>");
