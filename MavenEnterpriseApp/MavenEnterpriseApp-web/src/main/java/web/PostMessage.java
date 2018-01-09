@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package web;
 
 import ejb.NewsEntity;
@@ -77,17 +71,18 @@ public class PostMessage extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
-            out.println("<html>");
+            out.println("<html lang=\"es\">");
             out.println("<head>");
-            out.println("<title>Servlet PostMessage</title>");            
+            out.println("<title>Servlet Enviador de Mensajes</title>");
+            out.println("<meta charset=\"utf-8\">");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PostMessage at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Enviador de Mensajes en la URL: " + request.getContextPath() + "</h1>");
             
             // The following code adds the form to web page
-            out.println("<form>");
-            out.println("Title: <input type='text' name='title'><br/>");
-            out.println("Message: <textarea name='body'></textarea><br/>");
+            out.println("<form accept-charset='UTF-8' action='' method='post' enctype='application/x-www-form-urlencoded'>");
+            out.println("Título: <input type='text' name='title'><br/>");
+            out.println("Mensaje: <textarea name='body'></textarea><br/>");
             out.println("<input type='submit'><br/>");
             out.println("</form>");
             
