@@ -39,10 +39,12 @@ public class AppTest extends TestCase {
      */
     public void testMain() {
         System.out.println("main");
-        String[] args = null;
+        String[] args = {"test"};
         App.main(args);
+        String expected = "Ok";
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expected, args[0]);
+
     }
 
 }

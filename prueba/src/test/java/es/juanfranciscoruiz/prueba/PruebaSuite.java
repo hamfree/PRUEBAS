@@ -22,7 +22,7 @@ public class PruebaSuite extends TestCase {
     public static Test suite() {
         TestSuite suite = new TestSuite("PruebaSuite");
         suite.addTest(ProbarTerminalTest.suite());
-        suite.addTest(AppTest.suite());
+        //suite.addTest(AppTest.suite());
         return suite;
     }
 
