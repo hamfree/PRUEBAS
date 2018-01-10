@@ -32,7 +32,7 @@ public class ProbarTerminal {
     public ProbarTerminal() {
     }
 
-    public void test() throws IOException {
+    public boolean test() throws IOException {
 
         dTF = new DefaultTerminalFactory();
         this.posIni = null;
@@ -153,9 +153,11 @@ public class ProbarTerminal {
             term.bell();
             term.flush();
             Thread.sleep(200);
+            return true;
 
         } catch (IOException | InterruptedException e) {
             Logger.getLogger(ProbarTerminal.class.getName()).log(Level.SEVERE, null, e);
+            return false;
         } finally {
             if (term != null) {
                 try {
@@ -173,7 +175,7 @@ public class ProbarTerminal {
         }
     }
 
-    public void test2() {
+    public boolean test2() {
         //TODO: Introducir los comentarios aclaratorios
         dTF = new DefaultTerminalFactory();
         term = null;
@@ -238,9 +240,11 @@ public class ProbarTerminal {
                 term.flush();
                 ks = term.readInput();
             }
+            return true;
 
         } catch (IOException e) {
             Logger.getLogger(ProbarTerminal.class.getName()).log(Level.SEVERE, e.getMessage());
+            return false;
         } finally {
             if (term != null) {
                 try {

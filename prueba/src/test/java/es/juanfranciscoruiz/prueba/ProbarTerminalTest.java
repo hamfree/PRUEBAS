@@ -40,9 +40,9 @@ public class ProbarTerminalTest extends TestCase {
     public void testTest() throws Exception {
         System.out.println("test");
         ProbarTerminal instance = new ProbarTerminal();
-        instance.test();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean encontrado = instance.test();
+        assertEquals(true, encontrado);
+
     }
 
     /**
@@ -51,9 +51,8 @@ public class ProbarTerminalTest extends TestCase {
     public void testTest2() {
         System.out.println("test2");
         ProbarTerminal instance = new ProbarTerminal();
-        instance.test2();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean encontrado = instance.test2();
+        assertEquals(true, encontrado);
     }
 
 }
