@@ -35,23 +35,23 @@ public class ProbarTerminalTest extends TestCase {
     }
 
     /**
-     * Test of test method, of class ProbarTerminal.
+     * Test of tutorial1 method, of class ProbarTerminal.
      */
     public void testTest() throws Exception {
         System.out.println("test");
         ProbarTerminal instance = new ProbarTerminal();
-        boolean encontrado = instance.test();
+        boolean encontrado = instance.tutorial1();
         assertEquals(true, encontrado);
 
     }
 
     /**
-     * Test of test2 method, of class ProbarTerminal.
+     * Test of tutorial2 method, of class ProbarTerminal.
      */
     public void testTest2() {
         System.out.println("test2");
         ProbarTerminal instance = new ProbarTerminal();
-        boolean encontrado = instance.test2();
+        boolean encontrado = instance.tutorial2();
         assertEquals(true, encontrado);
     }
 

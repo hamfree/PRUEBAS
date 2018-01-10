@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package es.juanfranciscoruiz.prueba;
 
 import junit.framework.Test;
@@ -10,6 +5,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
+ * Implementación del conjunto de pruebas de Dummy
  *
  * @author hamfree
  */
@@ -19,9 +15,17 @@ public class PruebaSuite extends TestCase {
         super(testName);
     }
 
+    /**
+     * Compone el conjunto de pruebas y lo devuelve.
+     *
+     * @return Devuelve un TestSuite
+     * @see TestSuite
+     */
     public static Test suite() {
         TestSuite suite = new TestSuite("PruebaSuite");
         suite.addTest(ProbarTerminalTest.suite());
+
+        // No tiene sentido probar la clase que funciona como punto de entrada.
         //suite.addTest(AppTest.suite());
         return suite;
     }

@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
+ * Prueba la clase App de la aplicacion Dummy
  *
  * @author hamfree
  */
@@ -41,10 +42,8 @@ public class AppTest extends TestCase {
         System.out.println("main");
         String[] args = {"test"};
         App.main(args);
-        String expected = "Ok";
-        // TODO review the generated test code and remove the default call to fail.
+        String expected = "test";
         assertEquals(expected, args[0]);
-
     }
 
 }
