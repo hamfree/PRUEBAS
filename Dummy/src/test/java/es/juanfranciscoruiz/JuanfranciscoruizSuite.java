@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
+ * Conjunto de pruebas para Dummy
  *
  * @author hamfree
  */

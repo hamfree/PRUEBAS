@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package es.juanfranciscoruiz.prueba;
 
 import com.googlecode.lanterna.SGR;
@@ -21,6 +16,11 @@ import java.util.logging.Logger;
 
 /**
  *
+ * Clase con la que voy estudiando los tutoriales. Cada método corresponde a un
+ * tutorial en :
+ *
+ * @see https://github.com/mabe02/lanterna/blob/master/docs/contents.md
+ *
  * @author hamfree
  */
 public class ProbarTerminal {
@@ -32,7 +32,14 @@ public class ProbarTerminal {
     public ProbarTerminal() {
     }
 
-    public boolean test() throws IOException {
+    /**
+     * Código del tutorial uno de Lanterna
+     *
+     * @see
+     * https://github.com/mabe02/lanterna/blob/master/docs/tutorial/Tutorial01.md
+     * @return boolean true si todo ha ido bien, false en caso contrario.
+     */
+    public boolean tutorial1() {
 
         dTF = new DefaultTerminalFactory();
         this.posIni = null;
@@ -175,7 +182,14 @@ public class ProbarTerminal {
         }
     }
 
-    public boolean test2() {
+    /**
+     * Código del tutorial dos de Lanterna
+     *
+     * @see
+     * https://github.com/mabe02/lanterna/blob/master/docs/tutorial/Tutorial02.md
+     * @return boolean true si todo ha ido bien, false en caso contrario.
+     */
+    public boolean tutorial2() {
         //TODO: Introducir los comentarios aclaratorios
         dTF = new DefaultTerminalFactory();
         term = null;
@@ -256,4 +270,14 @@ public class ProbarTerminal {
         }
     }
 
+    /**
+     * Código del tutorial tres de Lanterna
+     *
+     * @see
+     * https://github.com/mabe02/lanterna/blob/master/docs/tutorial/Tutorial03.md
+     * @return boolean true si todo ha ido bien, false en caso contrario.
+     */
+    public boolean tutorial3() {
+        return false;
+    }
 }
