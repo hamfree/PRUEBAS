@@ -90,11 +90,25 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 # End of https://www.gitignore.io/api/java,maven,gradle,grails
+
 /EjemplosTutorialJava/src/tutorial/deployment/doingMoreWithRIA/examples/applet_AccessingCookies/dist/
 /EjemplosTutorialJava/src/tutorial/uiswing/examples/QandE/Beeper1Project/nbproject/private/
 /Pruebas/dist/
-/prueba/nbproject/
+/Pruebas/build/
+/Pruebas/nbproject/private/
 Pruebas/nbproject/private/private.xml
 Pruebas/nbproject/private/private.properties
 Pruebas/nbproject/private/config.properties
+Pruebas/.vscode/launch.json
+/prueba/nbproject/
 TMP/
+/EjemplosTutorialJava/nbproject/private/
+/GroovyJavaDemo/nbproject/private/
+/Dummy/nbproject/private/
+/EjemploMavenAplicacionWeb/target/
+/GroovyJavaDemo/build/
+/HolaMundo/build/
+/MavenEnterpriseApp/MavenEnterpriseApp-ejb/target/
+/MavenEnterpriseApp/MavenEnterpriseApp-web/target/
+/mavenproject1/target/
+/SpringDemo/target/
