@@ -1,0 +1,3 @@
+[submodule "lanterna"]
+	path = lanterna
+	url = https://hamfree@github.com/mabe02/lanterna.git
