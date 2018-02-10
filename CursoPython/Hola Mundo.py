@@ -74,3 +74,17 @@ while i < 5:
     print "i=",i
     i = i + 1
 print "Se termino el bucle."
+
+# la sentencia for
+sl2()
+print "Sentencia for\n"
+
+# imprimir tres veces la cadena 'hola' con un bucle for
+tresveces = ["Hola","Hola","Hola"]
+for x in tresveces:
+    print x
+
+# Ejercicio final sáb, 10/02/2018
+# Almacenar los datos de una persona (nombre, apellidos, edad, dni, peso y altura). Validar su dni y si 
+# es valido, calcular su IMC y mostrar la información de la persona
+sl2()
