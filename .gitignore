@@ -91,6 +91,7 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/java,maven,gradle,grails
 
+# Exclusiones varias
 /EjemplosTutorialJava/src/tutorial/deployment/doingMoreWithRIA/examples/applet_AccessingCookies/dist/
 /EjemplosTutorialJava/src/tutorial/uiswing/examples/QandE/Beeper1Project/nbproject/private/
 /Pruebas/dist/
