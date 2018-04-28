@@ -1,0 +1,99 @@
+abr 25, 2018 8:58:05 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:65)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:34)
+
+abr 25, 2018 10:24:12 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:192)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:61)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:34)
+
+abr 25, 2018 10:33:34 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:205)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:62)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:35)
+
+abr 25, 2018 10:37:17 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:205)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:62)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:35)
+
+abr 25, 2018 10:41:31 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:205)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:62)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:35)
+
+abr 25, 2018 10:42:43 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:205)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:62)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:35)
+
+abr 25, 2018 10:50:59 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:205)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:62)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:35)
+
+abr 25, 2018 10:53:26 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:205)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:62)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:35)
+
+abr 25, 2018 10:54:40 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:205)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:62)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:35)
+
+abr 25, 2018 10:56:02 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.servicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:205)
+	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:62)
+	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:35)
+

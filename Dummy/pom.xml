@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>name.ruiz.juanfco</groupId>
-    <artifactId>dummy</artifactId>
+    <groupId>es.juanfcoruiz</groupId>
+    <artifactId>es.juanfranciscoruiz.pruebas.testLanterna</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Dummy</name>
+    <name>Probando Lanterna</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -26,11 +26,11 @@
         <dependency>
             <groupId>com.googlecode.lanterna</groupId>
             <artifactId>lanterna</artifactId>
-            <version>3.0.0</version>
+            <version>3.1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
     </dependencies>
-    <description>Aplicacion Maven de consola para hacer test de librerías, etc.</description>
+    <description>Aplicacion Maven de consola para hacer pruebas</description>
     <build>
         <plugins>
             <plugin>
@@ -58,16 +58,4 @@
             </plugin>
         </plugins>
     </build>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
-                <configuration>
-                    <configLocation>config/sun_checks.xml</configLocation>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
 </project>
