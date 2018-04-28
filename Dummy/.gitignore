@@ -25,3 +25,7 @@ nbdist/
 nbactions.xml
 
 # End of https://www.gitignore.io/api/maven,netbeans
+.vscode/
+.classpath
+.project
+.settings/
