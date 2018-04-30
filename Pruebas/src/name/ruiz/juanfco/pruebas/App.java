@@ -45,7 +45,8 @@ public class App {
 //        app.testFicheroUtil();
 //        app.testGetAllCharsets();
 //        app.testImp();
-        app.testRead();
+//        app.testRead();
+        TiposNumericos.muestraLimites();
         System.exit(0);
     }
 
