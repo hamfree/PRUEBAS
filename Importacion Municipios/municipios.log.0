@@ -97,3 +97,43 @@ java.util.NoSuchElementException
 	at name.ruiz.juanfco.servicio.Aplicacion.ejecutaProceso(Aplicacion.java:62)
 	at name.ruiz.juanfco.servicio.Aplicacion.main(Aplicacion.java:35)
 
+abr 29, 2018 6:31:02 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.inicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:209)
+	at name.ruiz.juanfco.inicio.Aplicacion.ejecutaProceso(Aplicacion.java:66)
+	at name.ruiz.juanfco.inicio.Aplicacion.main(Aplicacion.java:39)
+
+abr 29, 2018 6:47:22 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:55)
+	at name.ruiz.juanfco.inicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:209)
+	at name.ruiz.juanfco.inicio.Aplicacion.ejecutaProceso(Aplicacion.java:66)
+	at name.ruiz.juanfco.inicio.Aplicacion.main(Aplicacion.java:39)
+
+abr 29, 2018 6:57:42 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:56)
+	at name.ruiz.juanfco.inicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:209)
+	at name.ruiz.juanfco.inicio.Aplicacion.ejecutaProceso(Aplicacion.java:66)
+	at name.ruiz.juanfco.inicio.Aplicacion.main(Aplicacion.java:39)
+
+abr 29, 2018 7:21:51 PM name.ruiz.juanfco.servicio.ImportaCSVimpl importa
+GRAVE: null
+java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at name.ruiz.juanfco.servicio.ImportaCSVimpl.importa(ImportaCSVimpl.java:56)
+	at name.ruiz.juanfco.inicio.Aplicacion.importaPoblacionesDelFichero(Aplicacion.java:209)
+	at name.ruiz.juanfco.inicio.Aplicacion.ejecutaProceso(Aplicacion.java:66)
+	at name.ruiz.juanfco.inicio.Aplicacion.main(Aplicacion.java:39)
+

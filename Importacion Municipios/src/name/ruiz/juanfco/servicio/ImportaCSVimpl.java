@@ -29,7 +29,7 @@ public class ImportaCSVimpl implements ImportaCSV {
     @Override
     public List<Poblacion> importa(File fcsv) {
         ArrayList<Poblacion> alPoblaciones = null;
-
+        int contador = 0;
         if (fcsv == null) {
             return null;
         } else if (fcsv.exists() && fcsv.canRead()) {
@@ -41,11 +41,12 @@ public class ImportaCSVimpl implements ImportaCSV {
             }
 
             try {
+
                 alPoblaciones = new ArrayList<>();
                 Scanner scanner = new Scanner(fcsv, "UTF-8");
                 while (scanner.hasNextLine()) {
                     String linea = scanner.nextLine();
-
+                    contador++;
                     Scanner scLinea = new Scanner(linea);
                     scLinea.useDelimiter(";");
                     if (scLinea.hasNext()) {
@@ -67,6 +68,9 @@ public class ImportaCSVimpl implements ImportaCSV {
                 Logger.getLogger(ImportaCSVimpl.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchElementException ex) {
                 Logger.getLogger(ImportaCSVimpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Excepcion en la linea " + contador);
+                System.out.println(ex.getLocalizedMessage());
+                ex.printStackTrace();
                 return alPoblaciones;
             }
         } else {

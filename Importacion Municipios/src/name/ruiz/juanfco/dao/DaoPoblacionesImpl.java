@@ -206,12 +206,11 @@ public class DaoPoblacionesImpl implements DaoPoblaciones {
                     .append(IDCCA).append(",")
                     .append(POBLA)
                     .append(") VALUES ")
-                    .append("('").append(poblacion.getIdPoblacion()).append("',")
-                    .append("'").append(poblacion.getIdProvincia()).append("',")
-                    .append("'").append(poblacion.getIdCCAA()).append("',")
-                    .append("'").append(poblacion.getPoblacion()).append("')");
+                    .append("('").append(filtraCampo(poblacion.getIdPoblacion())).append("',")
+                    .append("'").append(filtraCampo(poblacion.getIdProvincia())).append("',")
+                    .append("'").append(filtraCampo(poblacion.getIdCCAA())).append("',")
+                    .append("'").append(filtraCampo(poblacion.getPoblacion())).append("')");
             conectar();
-            System.out.println(sb.toString());
             int res = stmt.executeUpdate(sb.toString());
             if (res == 0 || res == 1) {
                 esInsertado = true;
@@ -245,4 +244,19 @@ public class DaoPoblacionesImpl implements DaoPoblaciones {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    private String filtraCampo(String campo) {
+        StringBuffer sb = new StringBuffer();
+        String comilla = "'";
+        if (campo.contains(comilla)) {
+            for (int i = 0; i < campo.length(); i++) {
+                if (campo.charAt(i) == '\'') {
+                    sb.append("\\").append(campo.charAt(i));
+                } else {
+                    sb.append(campo.charAt(i));
+                }
+            }
+            return sb.toString();
+        }
+        return campo;
+    }
 }
