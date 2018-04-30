@@ -113,3 +113,10 @@ TMP/
 /MavenEnterpriseApp/MavenEnterpriseApp-web/target/
 /mavenproject1/target/
 /SpringDemo/target/
+<<<<<<< HEAD
+/Pruebas/build/
+Pruebas/.vscode/launch.json
+/misc-DesktopDemoProject/nbproject/private/
+/misc-DesktopDemoProject/build/
+=======
+>>>>>>> 8b0f094f491efed15556c9bd49a60e471ec7a2ea
