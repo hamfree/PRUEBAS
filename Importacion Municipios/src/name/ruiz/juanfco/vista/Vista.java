@@ -13,13 +13,14 @@ import java.util.Map;
  * @author hamfree
  */
 public interface Vista {
-    public void muestraMensaje(Object msj);
 
-    public void muestraLista(List<?> lista);
+    public StringBuffer exploraObjeto(Object obj);
 
-    public void muestraMapa(Map<Object, Object> mapa);
+    public StringBuffer exploraLista(List<?> lista, int nivel);
 
-    public void muestraMensajes(Object... msj);
+    public StringBuffer exploraMapa(Map<Object, Object> mapa, int nivel);
 
-    public void muestraMatriz(Object[][] matriz);
+    public StringBuffer exploraObjetos(Object... obj);
+
+    public StringBuffer exploraVector(Object[] vector, int nivel);
 }
