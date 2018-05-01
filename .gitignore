@@ -100,5 +100,6 @@ hs_err_pid*
 **/nbdist/
 **/.nb-gradle/
 **/nbactions.xml
+**/nb-configuration.xml
 
 # End of https://www.gitignore.io/api/java,maven,gradle,grails
