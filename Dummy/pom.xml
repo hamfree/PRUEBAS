@@ -26,8 +26,7 @@
         <dependency>
             <groupId>com.googlecode.lanterna</groupId>
             <artifactId>lanterna</artifactId>
-            <version>3.1.0-SNAPSHOT</version>
-            <type>jar</type>
+            <version>3.0.0</version>
         </dependency>
     </dependencies>
     <description>Aplicacion Maven de consola para hacer pruebas</description>
