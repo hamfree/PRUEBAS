@@ -89,27 +89,16 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-# End of https://www.gitignore.io/api/java,maven,gradle,grails
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
 
-# Exclusiones varias
-/EjemplosTutorialJava/src/tutorial/deployment/doingMoreWithRIA/examples/applet_AccessingCookies/dist/
-/EjemplosTutorialJava/src/tutorial/uiswing/examples/QandE/Beeper1Project/nbproject/private/
-/Pruebas/dist/
-/Pruebas/build/
-/Pruebas/nbproject/private/
-Pruebas/nbproject/private/private.xml
-Pruebas/nbproject/private/private.properties
-Pruebas/nbproject/private/config.properties
-Pruebas/.vscode/launch.json
-/prueba/nbproject/
-TMP/
-/EjemplosTutorialJava/nbproject/private/
-/GroovyJavaDemo/nbproject/private/
-/Dummy/nbproject/private/
-/EjemploMavenAplicacionWeb/target/
-/GroovyJavaDemo/build/
-/HolaMundo/build/
-/MavenEnterpriseApp/MavenEnterpriseApp-ejb/target/
-/MavenEnterpriseApp/MavenEnterpriseApp-web/target/
-/mavenproject1/target/
-/SpringDemo/target/
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+nbactions.xml
+
+# End of https://www.gitignore.io/api/java,maven,gradle,grails
