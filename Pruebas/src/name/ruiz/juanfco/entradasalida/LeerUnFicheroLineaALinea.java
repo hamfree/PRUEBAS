@@ -1,4 +1,4 @@
-package name.ruiz.juanfco.pruebas;
+package name.ruiz.juanfco.entradasalida;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

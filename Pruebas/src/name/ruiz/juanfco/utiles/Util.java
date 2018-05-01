@@ -1,4 +1,4 @@
-package name.ruiz.juanfco.pruebas;
+package name.ruiz.juanfco.utiles;
 
 import java.io.Console;
 import java.nio.charset.Charset;
