@@ -29,32 +29,21 @@ public class Util {
         if (obj == null) {
             return true;
         } else if (obj instanceof String) {
-            if (obj.toString().length() == 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return obj.toString().length() == 0;
         } else if (obj.getClass().isArray()) {
             List l = Arrays.asList(obj);
-            if (l.size() == 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return l.isEmpty();
         } else if (obj.getClass().isAssignableFrom(Collection.class)) {
             Collection col = (Collection) obj;
-            if (col.size() == 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return col.isEmpty();
         }
         return false;
     }
 
     /**
-     * Imprime los argumentos indicados en la salida estándar. Puede usar el objeto Console si se pasa true al parámetro usaConsola.
-     * En caso contrario usara el canal estandar de salida.
+     * Imprime los argumentos indicados en la salida estándar. Puede usar el
+     * objeto Console si se pasa true al parámetro usaConsola. En caso contrario
+     * usara el canal estandar de salida.
      *
      * @param usaConsola booleano que si es true intentará usar Console.
      * @param args una lista de objetos a imprimir
