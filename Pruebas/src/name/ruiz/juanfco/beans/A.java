@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package name.ruiz.juanfco.maspruebas;
+package name.ruiz.juanfco.beans;
 
 import java.util.Objects;
 
 /**
- * Clase tonta para hacer pruebas de paso por referencia y valor desde métodos de otra clase.
+ * Clase tonta para hacer pruebas de paso por referencia y valor desde métodos
+ * de otra clase.
+ *
  * @author hamfree
  */
 public class A {
@@ -76,5 +73,4 @@ public class A {
         return "A{" + "cadena='" + cadena + "', entero=" + entero + '}';
     }
 
-    
 }

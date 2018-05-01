@@ -1,9 +1,4 @@
-/*
- * Este proyecto guarda todas las pruebas que hago en java y contiene clases
- * útiles que se pueden reutilizar en los distintos proyectos.
- * 
- */
-package name.ruiz.juanfco.pruebas;
+package name.ruiz.juanfco.inicio;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -15,7 +10,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static name.ruiz.juanfco.pruebas.ConvertidorStrings.printBytes;
+import name.ruiz.juanfco.beans.Persona;
+import name.ruiz.juanfco.entradasalida.FicheroUtil;
+import name.ruiz.juanfco.hilosyprocesos.Pausa;
+import name.ruiz.juanfco.numeros.TiposNumericos;
+import name.ruiz.juanfco.pruebas.CuatroObjetos;
+import static name.ruiz.juanfco.texto.ConvertidorStrings.printBytes;
+import name.ruiz.juanfco.texto.EjemploLocale;
+import name.ruiz.juanfco.utiles.Util;
 
 /**
  * Clase principal de la aplicacion que ejecuta las distintas clases que se prueban.

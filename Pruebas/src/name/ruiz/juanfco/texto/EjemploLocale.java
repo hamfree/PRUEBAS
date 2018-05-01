@@ -1,4 +1,4 @@
-package name.ruiz.juanfco.pruebas;
+package name.ruiz.juanfco.texto;
 
 import java.util.*;
 

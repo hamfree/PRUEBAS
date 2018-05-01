@@ -1,4 +1,6 @@
-package name.ruiz.juanfco.maspruebas;
+package name.ruiz.juanfco.inicio;
+
+import name.ruiz.juanfco.beans.A;
 
 public class Prueba {
 
@@ -11,9 +13,9 @@ public class Prueba {
         System.out.println("a = " + a.toString());
 
         /*
-            Mientras no asignemos el valor devuelto por el método al objeto no lo 
-            cambiaremos por otro nuevo asignado dentro del método, pero sí se 
-            pueden modificar sus propiedades....
+            Mientras no asignemos el valor devuelto por el método al objeto no 
+            lo  cambiaremos por otro nuevo asignado dentro del método, pero sí
+            se  pueden modificar sus propiedades....
          */
         prueba.metodo2(a);
         System.out.println("a = " + a.toString());
