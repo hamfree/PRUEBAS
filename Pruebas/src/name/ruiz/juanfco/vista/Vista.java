@@ -11,11 +11,11 @@ public interface Vista {
 
     public StringBuffer exploraObjeto(Object obj);
 
-    public StringBuffer exploraLista(List<?> lista, int nivel);
+    public StringBuffer exploraLista(List<?> lista);
 
-    public StringBuffer exploraMapa(Map<Object, Object> mapa, int nivel);
+    public StringBuffer exploraMapa(Map<Object, Object> mapa);
 
     public StringBuffer exploraObjetos(Object... obj);
 
-    public StringBuffer exploraVector(Object[] vector, int nivel);
+    public StringBuffer exploraVector(Object[] vector);
 }

@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import name.ruiz.juanfco.beans.Persona;
 import name.ruiz.juanfco.entradasalida.FicheroUtil;
-import name.ruiz.juanfco.hilosyprocesos.Pausa;
 import name.ruiz.juanfco.numeros.TiposNumericos;
 import name.ruiz.juanfco.pruebas.CuatroObjetos;
 import static name.ruiz.juanfco.texto.ConvertidorStrings.printBytes;
@@ -57,9 +56,9 @@ public class App {
      */
     public void testPausa() {
         System.out.println("Esperando un segundo...");
-        Pausa.unSeg();
+        //Pausa.unSeg();
         System.out.println("Hecho.\nEsperando cinco segundos...");
-        Pausa.variosSeg(5);
+        //Pausa.variosSeg(5);
         System.out.println("Hecho.");
     }
 

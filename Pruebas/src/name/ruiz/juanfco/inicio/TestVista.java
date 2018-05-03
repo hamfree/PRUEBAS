@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package name.ruiz.juanfco.vista;
+package name.ruiz.juanfco.inicio;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
+import name.ruiz.juanfco.vista.Vista;
+import name.ruiz.juanfco.vista.VistaImpl;
 
 /**
  *
@@ -47,6 +50,9 @@ public class TestVista {
     private final ArrayList<Object> listaVacia = new ArrayList<>(0);
     private final ArrayList<Object> lista = new ArrayList<>();
     private final ArrayList<Object> otraLista = new ArrayList<>();
+    private final ArrayList<Object> lista1 = new ArrayList<>();
+    private final ArrayList<Object> lista2 = new ArrayList<>();
+    private final ArrayList<Object> lista3 = new ArrayList<>();
 
     HashMap<Object, Object> elMapa = new HashMap<>();
 
@@ -107,9 +113,9 @@ public class TestVista {
         vector = new Object[4];
         matriz = new Object[5][];
 
-        vunidades = new Integer[9];
-        vdecenas = new Integer[9][9];
-        vcentenas = new Integer[9][9][9];
+        vunidades = new Integer[3];
+        vdecenas = new Integer[3][3];
+        vcentenas = new Integer[3][3][3];
         matriz4 = new Object[1][][][];
 
         venteros[0] = 10;
@@ -188,6 +194,28 @@ public class TestVista {
         otraLista.add(vdobles[2]);
         otraLista.add(vmonedas[1]);
 
+        // Para mostrar listas en multinivel ...
+        for (int i3 = 0; i3 < 5; i3++) {
+            lista3.add(new Random(System.currentTimeMillis()).nextInt());
+        }
+
+        for (int i2 = 0; i2 < 3; i2++) {
+            lista2.add(new Random(System.currentTimeMillis()).nextInt());
+        }
+        lista2.add(lista3);
+        for (int i2 = 0; i2 < 2; i2++) {
+            lista2.add(new Random(System.currentTimeMillis()).nextInt());
+        }
+
+        for (int i1 = 0; i1 < 4; i1++) {
+            lista1.add(new Random(System.currentTimeMillis()).nextInt());
+        }
+        lista1.add(lista2);
+        lista1.add(cadena);
+        for (int i1 = 0; i1 < 3; i1++) {
+            lista1.add(new Random(System.currentTimeMillis()).nextInt());
+        }
+
         // un mapa con distintos objetos
         elMapa.put("Uno", venteros);
         elMapa.put("dos", vdobles);
@@ -219,26 +247,31 @@ public class TestVista {
 
     public void testVector() {
         System.out.println("\nPruebas con ExploraVector()");
-        System.out.println(v.exploraVector(vector, 0).toString());
+        System.out.println(v.exploraVector(vector).toString());
 
-        System.out.println("\nPruebas con ExploraVector() - con parametro de dos dimensiones");
-        System.out.println(v.exploraVector(matriz, 0).toString());
+        System.out.println("\nPruebas con ExploraVector() - "
+                + "con parametro de dos dimensiones");
+        System.out.println(v.exploraVector(matriz).toString());
 
-        System.out.println("\nPruebas con ExploraVector() - con parametros de tres dimensiones");
-        System.out.println(v.exploraVector(vcentenas, 0).toString());
+        System.out.println("\nPruebas con ExploraVector() - "
+                + "con parametros de tres dimensiones");
+        System.out.println(v.exploraVector(vcentenas).toString());
     }
 
     public void testLista() {
-        System.out.println("\nPruebas con exploraLista() - lista vacia");
-        System.out.println(v.exploraLista(listaVacia, 0).toString());
+        System.out.println("\nPruebas con exploraLista() - lista normal");
+        System.out.println(v.exploraLista(otraLista).toString());
 
         System.out.println("\nPruebas con exploraLista() - lista que contiene otra lista");
-        System.out.println(v.exploraLista(lista, 0).toString());
+        System.out.println(v.exploraLista(lista).toString());
+
+        System.out.println("\nPruebas con exploraLista() - lista con tres niveles");
+        System.out.println(v.exploraLista(lista1).toString());
     }
 
     public void testMapa() {
         System.out.println("Pruebas con exploraMapa()");
-        System.out.println(v.exploraMapa(elMapa, 0).toString());
+        System.out.println(v.exploraMapa(elMapa).toString());
     }
 
     public void ayuda() {
