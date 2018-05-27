@@ -9,13 +9,13 @@ import java.util.Map;
  */
 public interface Vista {
 
-    public StringBuffer exploraObjeto(Object obj);
+    public StringBuffer exploraObjeto(Object obj, boolean saltarLinea);
 
-    public StringBuffer exploraLista(List<?> lista);
+    public StringBuffer exploraLista(List<?> lista, boolean saltarLinea);
 
-    public StringBuffer exploraMapa(Map<Object, Object> mapa);
+    public StringBuffer exploraMapa(Map<Object, Object> mapa, boolean saltarLinea);
 
-    public StringBuffer exploraObjetos(Object... obj);
+    public StringBuffer exploraObjetos(boolean saltarLinea, Object... obj);
 
-    public StringBuffer exploraVector(Object[] vector);
+    public StringBuffer exploraVector(Object[] vector, boolean saltarLinea);
 }
