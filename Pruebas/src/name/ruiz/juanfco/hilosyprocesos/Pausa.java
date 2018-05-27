@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package name.ruiz.juanfco.pruebas;
+package name.ruiz.juanfco.hilosyprocesos;
 
 /**
  *

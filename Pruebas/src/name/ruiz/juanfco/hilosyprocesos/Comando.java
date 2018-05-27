@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
  */
 public class Comando {
 
-    private final String[] comandosInternos = {"ASSOC", "CALL", "CD", "CLS", "COLOR",
+    private final static String[] COMANDOSINTERNOS = {"ASSOC", "CALL", "CD", "CLS", "COLOR",
         "COPY", "DATE", "DEL", "DIR", "ECHO", "ENDLOCAL", "ERASE", "EXIT", "FOR",
         "FTYPE", "GOTO", "IF", "MD", "MKDIR", "MKLINK", "MOVE", "PATH", "PAUSE",
         "POPD", "PROMPT", "PUSHD", "RD", "RMDIR", "REM", "REN", "SET",
@@ -32,7 +32,7 @@ public class Comando {
      * @param args
      * @return
      */
-    public int ejecuta(String comando, String... args) {
+    public static int ejecuta(String comando, String... args) {
         int resultado = 0;
         StringBuilder orden = new StringBuilder();
         try {
@@ -41,8 +41,10 @@ public class Comando {
                     orden.append("cmd /c ").append(comando).append(" ");
                 }
 
-                for (String arg : args) {
-                    orden.append(arg).append(" ");
+                if (args != null && args.length > 0) {
+                    for (String arg : args) {
+                        orden.append(arg).append(" ");
+                    }
                 }
 
                 Process p = Runtime.getRuntime().exec(orden.toString());
@@ -66,10 +68,10 @@ public class Comando {
      * @param comando
      * @return
      */
-    private boolean esUnComandoInterno(String comando) {
+    private static boolean esUnComandoInterno(String comando) {
         boolean resultado = false;
         comando = comando.trim();
-        for (String cmd : comandosInternos) {
+        for (String cmd : COMANDOSINTERNOS) {
             if (comando.equalsIgnoreCase(cmd)) {
                 resultado = true;
                 break;

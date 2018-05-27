@@ -7,13 +7,18 @@ package name.ruiz.juanfco.inicio;
 
 import java.net.URL;
 import java.util.ArrayList;
+import name.ruiz.juanfco.hilosyprocesos.Comando;
 import name.ruiz.juanfco.pruebas.reflexion.JarClassLoader;
+import name.ruiz.juanfco.utiles.Util;
 
 /**
  *
  * @author hamfree
  */
 public class Menu {
+
+    ArrayList<String> listaClases;
+    ArrayList<String> listaClasesConMain;
 
     public Menu() {
     }
@@ -30,19 +35,28 @@ public class Menu {
 
     public void procesa() throws Exception {
         URL url = getClass().getProtectionDomain().getCodeSource().getLocation();
-        ArrayList<String> listaClases = null;
-        ArrayList<String> listaClasesConMain = null;
+        StringBuilder sb = new StringBuilder();
         String linea;
 
+        Comando.ejecuta("CLS", (String[]) null);
+
         if (url != null) {
-            System.out.println("Ruta al fichero JAR : " + url.getFile());
             JarClassLoader jcl = new JarClassLoader(url);
+
+            sb.append("Ruta al fichero JAR : ").append(url.getPath());
+            muestraTitulo(sb.toString());
+
+            sb.setLength(0);
+            sb.append("Lista de clases en el JAR:");
+            muestraTitulo(sb.toString());
+
             listaClases = (ArrayList<String>) jcl.getAllClassesInJar();
-            System.out.println("Lista de clases en el JAR:");
             muestraLista(listaClases);
 
             listaClasesConMain = (ArrayList<String>) jcl.getClassesWithMainMethod(listaClases);
-            System.out.println("Lista de clases con metodo main()");
+            sb.setLength(0);
+            sb.append("Lista de clases con metodo main()");
+            muestraTitulo(sb.toString());
             muestraLista(listaClasesConMain);
         }
     }
@@ -56,6 +70,19 @@ public class Menu {
                     System.out.println(s);
                 }
             }
+            System.out.println(System.getProperty("line.separator"));
         }
+    }
+
+    private void muestraTitulo(String msg) {
+        StringBuilder sb = new StringBuilder();
+        int letras;
+        sb.setLength(0);
+        sb.append(msg);
+        Util.impsl(true, 1, sb.toString());
+        letras = sb.length();
+        sb.setLength(0);
+        sb.append(Util.getCharNTimes('=', letras));
+        Util.impsl(true, 2, sb.toString());
     }
 }
