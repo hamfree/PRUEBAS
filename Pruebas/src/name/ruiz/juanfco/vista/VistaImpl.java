@@ -27,7 +27,7 @@ public class VistaImpl implements Vista {
     private final String TAB = " ";
 
     @Override
-    public StringBuffer exploraObjeto(Object msj) {
+    public StringBuffer exploraObjeto(Object msj, boolean sl) {
         StringBuffer sb = new StringBuffer();
         sb.setLength(0);
         if (msj != null) {
@@ -35,11 +35,11 @@ public class VistaImpl implements Vista {
             if (sb.length() == 0) {
                 Class cl = msj.getClass();
                 if (cl.isArray()) {
-                    sb = exploraVector((Object[]) msj);
+                    sb = exploraVector((Object[]) msj, sl);
                 } else if (cl.isAssignableFrom(ArrayList.class)) {
-                    sb = exploraLista((List<?>) msj);
+                    sb = exploraLista((List<?>) msj, sl);
                 } else if (cl.isAssignableFrom(HashMap.class)) {
-                    sb = exploraMapa((Map<Object, Object>) msj);
+                    sb = exploraMapa((Map<Object, Object>) msj, sl);
                 }
             }
         } else {
@@ -49,7 +49,7 @@ public class VistaImpl implements Vista {
     }
 
     @Override
-    public StringBuffer exploraVector(Object[] matriz) {
+    public StringBuffer exploraVector(Object[] matriz, boolean sl) {
         StringBuffer sb = new StringBuffer();
         if (matriz != null) {
             int elementos = matriz.length;
@@ -57,7 +57,7 @@ public class VistaImpl implements Vista {
                 int indice = 0;
                 sb.append("VECTOR").append(PA)
                         .append(elementos).append(PC)
-                        .append(":").append(LA).append(" ");
+                        .append(":").append(LA).append(SL);
                 for (Object o : matriz) {
                     sb.append(CA).append(indice).append(CC).append(" = ");
                     sb.append(LA);
@@ -65,20 +65,27 @@ public class VistaImpl implements Vista {
                         Class clazz = o.getClass();
                         if (clazz.isArray()) {
                             Object oa[] = (Object[]) o;
-                            sb.append(exploraVector(oa));
+                            sb.append(exploraVector(oa, sl));
                         } else if (clazz.isAssignableFrom(HashMap.class)) {
                             HashMap<Object, Object> hm = (HashMap<Object, Object>) o;
-                            sb.append(exploraMapa(hm));
+                            sb.append(exploraMapa(hm, sl));
                         } else {
                             sb.append(procesaObjeto(o));
                         }
                     } else {
-                        sb.append("NULL").append(",");
+                        sb.append("NULL");
                     }
-                    sb.append(" ").append(LC).append(",");
+                    sb.append(" ").append(LC);
+
+                    if (sl) {
+                        sb.append(SL);
+                    } else {
+                        sb.append(",");
+                    }
                     indice++;
                 }
                 sb = sb.deleteCharAt(sb.length() - 1);
+                sb.append(SL).append(LC);
             } else {
                 sb.append("* Vector VACIO *").append(" ").append(LC);
             }
@@ -89,7 +96,7 @@ public class VistaImpl implements Vista {
     }
 
     @Override
-    public StringBuffer exploraLista(List<?> lista) {
+    public StringBuffer exploraLista(List<?> lista, boolean sl) {
         StringBuffer sb = new StringBuffer();
         if (lista != null) {
             int indice = 0;
@@ -97,7 +104,7 @@ public class VistaImpl implements Vista {
             if (elementos > 0) {
                 sb.append("ARRAYLIST")
                         .append(PA).append(elementos).append(PC)
-                        .append(":").append(LA).append(" ");
+                        .append(":").append(LA).append(SL);
                 for (Object o : lista) {
                     sb.append(CA).append(indice).append(CC);
                     sb.append(LA);
@@ -105,20 +112,26 @@ public class VistaImpl implements Vista {
                         Class cl = o.getClass();
                         if (cl.isArray()) {
                             Object oa[] = (Object[]) o;
-                            sb.append(exploraVector(oa));
+                            sb.append(exploraVector(oa, sl));
                         } else if (cl.isAssignableFrom(ArrayList.class)) {
                             ArrayList<Object> otraLista = (ArrayList<Object>) o;
-                            sb.append(exploraLista(otraLista));
+                            sb.append(exploraLista(otraLista, sl));
                         } else if (cl.isAssignableFrom(HashMap.class)) {
                             HashMap<Object, Object> hm = (HashMap<Object, Object>) o;
-                            sb.append(exploraMapa(hm));
+                            sb.append(exploraMapa(hm, sl));
                         } else {
                             sb.append(procesaObjeto(o));
                         }
                     } else {
                         sb.append("NULL");
                     }
-                    sb.append(LC).append(",");
+
+                    sb.append(LC);
+                    if (sl) {
+                        sb.append(SL);
+                    } else {
+                        sb.append(",");
+                    }
                     indice++;
                 }
                 sb = sb.deleteCharAt(sb.length() - 1);
@@ -133,7 +146,7 @@ public class VistaImpl implements Vista {
     }
 
     @Override
-    public StringBuffer exploraMapa(Map<Object, Object> mapa) {
+    public StringBuffer exploraMapa(Map<Object, Object> mapa, boolean sl) {
         StringBuffer sb = new StringBuffer();
         if (mapa != null) {
             if (!mapa.isEmpty()) {
@@ -149,11 +162,11 @@ public class VistaImpl implements Vista {
                     if (value != null) {
                         Class clazz = value.getClass();
                         if (clazz.isArray()) {
-                            sb.append(exploraVector((Object[]) value));
+                            sb.append(exploraVector((Object[]) value, sl));
                         } else if (clazz.isAssignableFrom(ArrayList.class)) {
-                            sb.append(exploraLista((ArrayList) value));
+                            sb.append(exploraLista((ArrayList) value, sl));
                         } else if (clazz.isAssignableFrom(HashMap.class)) {
-                            sb.append(exploraMapa((HashMap) value));
+                            sb.append(exploraMapa((HashMap) value, sl));
                         } else {
                             sb.append(procesaObjeto(value));
                         }
@@ -172,7 +185,7 @@ public class VistaImpl implements Vista {
     }
 
     @Override
-    public StringBuffer exploraObjetos(Object... msj) {
+    public StringBuffer exploraObjetos(boolean sl, Object... msj) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

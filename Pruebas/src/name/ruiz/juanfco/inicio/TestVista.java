@@ -230,48 +230,52 @@ public class TestVista {
 
     public void test() {
         StringBuilder sb = new StringBuilder();
+        boolean sl = true;
 
         System.out.println("Pruebas con exploraObjeto()");
-        System.out.println(v.exploraObjeto(nulo).toString());
-        System.out.println(v.exploraObjeto(octeto));
-        System.out.println(v.exploraObjeto(corto));
-        System.out.println(v.exploraObjeto(entero));
-        System.out.println(v.exploraObjeto(largo));
-        System.out.println(v.exploraObjeto(doble));
-        System.out.println(v.exploraObjeto(cantidad));
-        System.out.println(v.exploraObjeto(caracter));
-        System.out.println(v.exploraObjeto(cadena));
-        System.out.println(v.exploraObjeto(doble));
+        System.out.println(v.exploraObjeto(nulo, sl).toString());
+        System.out.println(v.exploraObjeto(octeto, sl));
+        System.out.println(v.exploraObjeto(corto, sl));
+        System.out.println(v.exploraObjeto(entero, sl));
+        System.out.println(v.exploraObjeto(largo, sl));
+        System.out.println(v.exploraObjeto(doble, sl));
+        System.out.println(v.exploraObjeto(cantidad, sl));
+        System.out.println(v.exploraObjeto(caracter, sl));
+        System.out.println(v.exploraObjeto(cadena, sl));
+        System.out.println(v.exploraObjeto(doble, sl));
 
     }
 
     public void testVector() {
+        boolean sl = true;
         System.out.println("\nPruebas con ExploraVector()");
-        System.out.println(v.exploraVector(vector).toString());
+        System.out.println(v.exploraVector(vector, sl).toString());
 
         System.out.println("\nPruebas con ExploraVector() - "
                 + "con parametro de dos dimensiones");
-        System.out.println(v.exploraVector(matriz).toString());
+        System.out.println(v.exploraVector(matriz, sl).toString());
 
         System.out.println("\nPruebas con ExploraVector() - "
                 + "con parametros de tres dimensiones");
-        System.out.println(v.exploraVector(vcentenas).toString());
+        System.out.println(v.exploraVector(vcentenas, sl).toString());
     }
 
     public void testLista() {
+        boolean sl = true;
         System.out.println("\nPruebas con exploraLista() - lista normal");
-        System.out.println(v.exploraLista(otraLista).toString());
+        System.out.println(v.exploraLista(otraLista, sl).toString());
 
         System.out.println("\nPruebas con exploraLista() - lista que contiene otra lista");
-        System.out.println(v.exploraLista(lista).toString());
+        System.out.println(v.exploraLista(lista, sl).toString());
 
         System.out.println("\nPruebas con exploraLista() - lista con tres niveles");
-        System.out.println(v.exploraLista(lista1).toString());
+        System.out.println(v.exploraLista(lista1, sl).toString());
     }
 
     public void testMapa() {
+        boolean sl = true;
         System.out.println("Pruebas con exploraMapa()");
-        System.out.println(v.exploraMapa(elMapa).toString());
+        System.out.println(v.exploraMapa(elMapa, sl).toString());
     }
 
     public void ayuda() {

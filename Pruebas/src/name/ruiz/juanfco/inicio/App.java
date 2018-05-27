@@ -29,9 +29,8 @@ public class App {
     final String SF;
 
     public App() {
-        Util u = new Util();
-        this.SL = u.SL;
-        this.SF = u.SF;
+        this.SL = Util.getSL();
+        this.SF = Util.getSF();
     }
 
     /**
