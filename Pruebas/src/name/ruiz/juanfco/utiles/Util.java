@@ -28,12 +28,29 @@ import java.util.jar.JarFile;
  * @author hamfree
  */
 public class Util {
-
+    /**
+     * Caracter de salto de linea del sistema operativo
+     */
     private static final String SL = System.getProperty("line.separator");
+    /**
+     * Caracter separador de rutas del sistema operativo
+     */
     private static final String SF = System.getProperty("file.separator");
+    /**
+     * Caracter que indica el inicio del contenido de un objeto
+     */
     private static final String CAR_INI = "[";
+    /**
+     * Caracter que indica el final del contenido de un objeto
+     */
     private static final String CAR_FIN = "]";
+    /**
+     * Caracter separador de items
+     */
     private static final String SEP = ", ";
+    /**
+     * Constante que representa el valor textual de NULL
+     */
     private static final String NULL = "null";
 
     //Getters y Setters
@@ -63,9 +80,12 @@ public class Util {
 
     // Métodos de utilidad
     /**
+     * Indica si el objeto pasado es nulo o está vacío (en el caso de ser una
+     * colección, u otro objeto contenedor de objetos.
      *
-     * @param obj
-     * @return
+     * @param obj el objeto a comprobar
+     * @return true si el objeto es nulo o está vacío, false en el caso
+     * contrario.
      */
     public static boolean isNullOrEmpty(Object obj) {
         if (obj == null) {
@@ -89,17 +109,54 @@ public class Util {
      *
      * @param usaConsola booleano que si es true intentará usar Console.
      * @param args una lista de objetos a imprimir
-     * @throws Exception en caso de pasar parámetros nulos.
+     * @throws IllegalArgumentException en caso de pasar parámetros nulos.
      */
-    public static void imp(boolean usaConsola, Object... args) throws Exception {
+    public static void imp(boolean usaConsola, Object... args) throws IllegalArgumentException {
         StringBuilder sb = new StringBuilder();
         if (args == null) {
-            throw new Exception("¡Parámetros nulos!");
+            throw new IllegalArgumentException("¡Parámetros nulos!");
         } else {
             for (Object arg : args) {
                 sb.append(arg.toString());
             }
         }
+        imprime(sb, usaConsola);
+    }
+
+    /**
+     * Imprime los argumentos indicados en la salida estándar. Puede usar el
+     * objeto Console si se pasa true al parámetro usaConsola. En caso contrario
+     * usara el canal estandar de salida. Despues de imprimir la lista de
+     * argumentos hará tantos saltos de línea como indiquemos en el parámetro sl
+     *
+     * @param usaConsola booleano que si es true intentará usar Console.
+     * @param sl entero con la cantidad de saltos de línea a realizar
+     * @param args una lista de objetos a imprimir
+     * @throws IllegalArgumentException en caso de pasar parámetros nulos.
+     */
+    public static void impsl(boolean usaConsola, int sl, Object... args) throws IllegalArgumentException {
+        StringBuilder sb = new StringBuilder();
+        if (args == null) {
+            throw new IllegalArgumentException("¡Parámetros nulos!");
+        } else {
+            for (Object arg : args) {
+                sb.append(arg.toString());
+            }
+            if (sl > 0) {
+                for (int i = 0; i < sl; i++) {
+                    sb.append(Util.SL);
+                }
+            }
+        }
+        imprime(sb, usaConsola);
+    }
+
+    /**
+     *
+     * @param sb
+     * @param usaConsola
+     */
+    private static void imprime(StringBuilder sb, boolean usaConsola) {
         if (usaConsola) {
             Console con = System.console();
             if (con == null) {
@@ -185,57 +242,20 @@ public class Util {
     }
 
     /**
-     * Lista los contenidos del directorio para una carpeta de recursos. No es
-     * recursiva. Esta es básicamente una implementación de fuerza bruta.
-     * Funciona para ficheros regulares y también JARs.
      *
-     * @author Greg Briggs
-     * @param clazz Cualquier clase java que vive en el mismo lugar que los
-     * recursos que quieres.
-     * @param path Debe terminar con "/", pero no empezar con una.
-     * @return Solo el nombre de cada elemento miembro, no las rutas completas.
-     * @throws URISyntaxException en caso de error
-     * @throws IOException en caso de error de entrada/salida
+     * @param theChar
+     * @param times
+     * @return
      */
-    public String[] getResourceListing(Class clazz, String path) throws URISyntaxException, IOException {
-        URL dirURL = clazz.getClassLoader().getResource(path);
-        if (dirURL != null && dirURL.getProtocol().equals("file")) {
-            /* Una ruta de fichero: suficientemente fácil */
-            return new File(dirURL.toURI()).list();
-        }
-
-        if (dirURL == null) {
-            /*
-             * En caso de un fichero jar, no podemos en realidad encontrar un directorio.
-             * Tengo que asumir el mismo jar como clase.
-             */
-            String me = clazz.getName().replace(".", "/") + ".class";
-            dirURL = clazz.getClassLoader().getResource(me);
-        }
-
-        if (dirURL.getProtocol().equals("jar")) {
-            /* Una ruta de JAR */
-            // quito solo el fichero JAR
-            String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf("!"));
-            JarFile jar = new JarFile(URLDecoder.decode(jarPath, "UTF-8"));
-            Enumeration<JarEntry> entries = jar.entries(); //da TODAS las entradas en el jar
-            Set<String> result = new HashSet<>(); //evita duplicados en caso se que sea un subdirectorio
-            while (entries.hasMoreElements()) {
-                String name = entries.nextElement().getName();
-                if (name.startsWith(path)) { //filtra segun la ruta
-                    String entry = name.substring(path.length());
-                    int checkSubdir = entry.indexOf("/");
-                    if (checkSubdir >= 0) {
-                        // si esto es un subdirectorio, simplemente devolvemos el nombre del directorio
-                        entry = entry.substring(0, checkSubdir);
-                    }
-                    result.add(entry);
-                }
+    public static String getCharNTimes(char theChar, int times) {
+        StringBuilder sb = new StringBuilder();
+        Character c = theChar;
+        if (c > 32 && times > 0) {
+            for (int i = 0; i < times; i++) {
+                sb.append(c);
             }
-            return result.toArray(new String[result.size()]);
         }
-
-        throw new UnsupportedOperationException("No puedo listar ficheros para la URL " + dirURL);
+        return sb.toString();
     }
 
     /**
