@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import name.ruiz.juanfco.hilosyprocesos.Comando;
 import name.ruiz.juanfco.pruebas.reflexion.JarClassLoader;
+import name.ruiz.juanfco.utiles.IO;
 import name.ruiz.juanfco.utiles.Util;
 
 /**
@@ -79,10 +80,10 @@ public class Menu {
         int letras;
         sb.setLength(0);
         sb.append(msg);
-        Util.impsl(true, 1, sb.toString());
+        IO.prtln(true, 1, sb.toString());
         letras = sb.length();
         sb.setLength(0);
-        sb.append(Util.getCharNTimes('=', letras));
-        Util.impsl(true, 2, sb.toString());
+        sb.append(Util.repiteCaracter('=', letras));
+        IO.prtln(true, 2, sb.toString());
     }
 }

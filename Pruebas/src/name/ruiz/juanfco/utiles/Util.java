@@ -1,25 +1,11 @@
 package name.ruiz.juanfco.utiles;
 
-import java.io.Console;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
 import java.util.SortedMap;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
+import java.util.logging.Logger;
 
 /**
  * Clase con metodos de utilidad usados frecuentemente por las otras clases de
@@ -28,6 +14,12 @@ import java.util.jar.JarFile;
  * @author hamfree
  */
 public class Util {
+
+    /**
+     * Para la depuracion.
+     */
+    private static final Logger LOG = Logger.getLogger(Util.class.getName());
+
     /**
      * Caracter de salto de linea del sistema operativo
      */
@@ -52,6 +44,53 @@ public class Util {
      * Constante que representa el valor textual de NULL
      */
     private static final String NULL = "null";
+
+    /**
+     * Evitamos que se pueda instanciar
+     */
+    private Util() {
+
+    }
+
+    /**
+     * Obtiene todos los charsets soportados por la MVJ actual.
+     *
+     * @return una lista con todos los charsets soportados por la MVJ actual.
+     */
+    public static List<Charset> getAllCharsets() {
+        SortedMap<String, Charset> sm;
+        ArrayList<Charset> al = null;
+        sm = Charset.availableCharsets();
+        Iterator<Charset> it = sm.values().iterator();
+        if (it != null) {
+            al = new ArrayList<>();
+            while (it.hasNext()) {
+                Charset ch = it.next();
+                al.add(ch);
+            }
+        }
+        return al;
+    }
+
+    /**
+     * Genera una cadena compuesta por el caracter <code>car</code> tantas veces
+     * como indica <code>veces</code>.
+     *
+     * @param car el caracter con el que va a estar compuesta la cadena
+     * @param veces el numero de veces que se repite el caracter en la cadena
+     * @return una cadena con el caracter <code>car</code> repetida tantas veces
+     * como indica <code>veces</code>
+     */
+    public static String repiteCaracter(Character car, int veces) {
+        StringBuilder sb = new StringBuilder();
+        sb.setLength(0);
+        if (car != null && veces > 0) {
+            for (int i = 0; i < veces; i++) {
+                sb.append(car);
+            }
+        }
+        return sb.toString();
+    }
 
     //Getters y Setters
     public static String getSL() {
@@ -78,244 +117,10 @@ public class Util {
         return NULL;
     }
 
-    // Métodos de utilidad
     /**
-     * Indica si el objeto pasado es nulo o está vacío (en el caso de ser una
-     * colección, u otro objeto contenedor de objetos.
-     *
-     * @param obj el objeto a comprobar
-     * @return true si el objeto es nulo o está vacío, false en el caso
-     * contrario.
+     * @return el log
      */
-    public static boolean isNullOrEmpty(Object obj) {
-        if (obj == null) {
-            return true;
-        } else if (obj instanceof String) {
-            return obj.toString().length() == 0;
-        } else if (obj.getClass().isArray()) {
-            List l = Arrays.asList(obj);
-            return l.isEmpty();
-        } else if (obj.getClass().isAssignableFrom(Collection.class)) {
-            Collection col = (Collection) obj;
-            return col.isEmpty();
-        }
-        return false;
-    }
-
-    /**
-     * Imprime los argumentos indicados en la salida estándar. Puede usar el
-     * objeto Console si se pasa true al parámetro usaConsola. En caso contrario
-     * usara el canal estandar de salida.
-     *
-     * @param usaConsola booleano que si es true intentará usar Console.
-     * @param args una lista de objetos a imprimir
-     * @throws IllegalArgumentException en caso de pasar parámetros nulos.
-     */
-    public static void imp(boolean usaConsola, Object... args) throws IllegalArgumentException {
-        StringBuilder sb = new StringBuilder();
-        if (args == null) {
-            throw new IllegalArgumentException("¡Parámetros nulos!");
-        } else {
-            for (Object arg : args) {
-                sb.append(arg.toString());
-            }
-        }
-        imprime(sb, usaConsola);
-    }
-
-    /**
-     * Imprime los argumentos indicados en la salida estándar. Puede usar el
-     * objeto Console si se pasa true al parámetro usaConsola. En caso contrario
-     * usara el canal estandar de salida. Despues de imprimir la lista de
-     * argumentos hará tantos saltos de línea como indiquemos en el parámetro sl
-     *
-     * @param usaConsola booleano que si es true intentará usar Console.
-     * @param sl entero con la cantidad de saltos de línea a realizar
-     * @param args una lista de objetos a imprimir
-     * @throws IllegalArgumentException en caso de pasar parámetros nulos.
-     */
-    public static void impsl(boolean usaConsola, int sl, Object... args) throws IllegalArgumentException {
-        StringBuilder sb = new StringBuilder();
-        if (args == null) {
-            throw new IllegalArgumentException("¡Parámetros nulos!");
-        } else {
-            for (Object arg : args) {
-                sb.append(arg.toString());
-            }
-            if (sl > 0) {
-                for (int i = 0; i < sl; i++) {
-                    sb.append(Util.SL);
-                }
-            }
-        }
-        imprime(sb, usaConsola);
-    }
-
-    /**
-     *
-     * @param sb
-     * @param usaConsola
-     */
-    private static void imprime(StringBuilder sb, boolean usaConsola) {
-        if (usaConsola) {
-            Console con = System.console();
-            if (con == null) {
-                System.out.format("%s", sb.toString());
-            } else {
-                con.printf("%s", sb.toString());
-            }
-        } else {
-            System.out.format("%s", sb.toString());
-        }
-    }
-
-    /**
-     *
-     * @param usaConsola
-     * @return
-     * @throws java.lang.Exception
-     */
-    public static String read(boolean usaConsola) throws Exception {
-        String dato = "";
-        if (usaConsola) {
-            Console con = System.console();
-            if (con == null) {
-                Scanner sc = new Scanner(System.in);
-                dato = sc.nextLine();
-            } else {
-                dato = con.readLine();
-            }
-        }
-        return dato;
-    }
-
-    /**
-     *
-     * @param dato
-     * @return
-     */
-    public boolean isInteger(String dato) {
-        if (!isNullOrEmpty(dato)) {
-            try {
-                int tmp = Integer.parseInt(dato);
-                return true;
-            } catch (NumberFormatException ex) {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    /**
-     *
-     * @param dato
-     * @return
-     */
-    public boolean isDouble(String dato) {
-        if (!isNullOrEmpty(dato)) {
-            try {
-                double tmp = Double.parseDouble(dato);
-            } catch (NumberFormatException ex) {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Charset> getAllCharsets() {
-        SortedMap<String, Charset> sm;
-        ArrayList<Charset> al = null;
-        sm = Charset.availableCharsets();
-        Iterator<Charset> it = sm.values().iterator();
-        if (it != null) {
-            al = new ArrayList<>();
-            while (it.hasNext()) {
-                Charset ch = it.next();
-                al.add(ch);
-            }
-        }
-        return al;
-    }
-
-    /**
-     *
-     * @param theChar
-     * @param times
-     * @return
-     */
-    public static String getCharNTimes(char theChar, int times) {
-        StringBuilder sb = new StringBuilder();
-        Character c = theChar;
-        if (c > 32 && times > 0) {
-            for (int i = 0; i < times; i++) {
-                sb.append(c);
-            }
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Devuelve una representación textual de una matriz.
-     *
-     * @param unaMatriz La matriz de la que se quiere su representación textual.
-     * @return una cadena con la representacion textual de la matriz o la
-     * constante NULL ("null").
-     */
-    public static String array2String(Object unaMatriz) {
-        if (unaMatriz == null) {
-            return NULL;
-        }
-        compruebaObjetoEsUnaMatriz(unaMatriz);
-
-        StringBuilder result = new StringBuilder(CAR_INI);
-        int length = Array.getLength(unaMatriz);
-        for (int idx = 0; idx < length; ++idx) {
-            Object item = Array.get(unaMatriz, idx);
-            if (esUnaMatrizNoNula(item)) {
-                //recursive call!
-                result.append(array2String(item));
-            } else {
-                result.append(item);
-            }
-            if (!esUltimoElemento(idx, length)) {
-                result.append(SEP);
-            }
-        }
-        result.append(CAR_FIN);
-        return result.toString();
-    }
-
-    //Metodos de utilidad y ayuda para array2String()
-    /**
-     *
-     * @param unaMatriz
-     */
-    private static void compruebaObjetoEsUnaMatriz(Object unaMatriz) {
-        if (!unaMatriz.getClass().isArray()) {
-            throw new IllegalArgumentException("El Objeto no es una matriz.");
-        }
-    }
-
-    /**
-     *
-     * @param unElmento
-     * @return
-     */
-    private static boolean esUnaMatrizNoNula(Object unElmento) {
-        return unElmento != null && unElmento.getClass().isArray();
-    }
-
-    /**
-     *
-     * @param unIndice
-     * @param unaLongitud
-     * @return
-     */
-    private static boolean esUltimoElemento(int unIndice, int unaLongitud) {
-        return (unIndice == unaLongitud - 1);
+    public static Logger getLog() {
+        return LOG;
     }
 }

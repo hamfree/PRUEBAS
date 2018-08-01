@@ -1,4 +1,4 @@
-package name.ruiz.juanfco.inicio;
+package name.ruiz.juanfco.pruebas.consola;
 
 import java.io.Console;
 import java.util.Arrays;

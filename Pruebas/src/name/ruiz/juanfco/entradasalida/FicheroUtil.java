@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import name.ruiz.juanfco.utiles.Util;
+import name.ruiz.juanfco.utiles.Types;
 
 /**
  *
@@ -13,7 +13,7 @@ import name.ruiz.juanfco.utiles.Util;
 public class FicheroUtil {
 
     public static void writeFile(String path, String content) throws Exception {
-        if (Util.isNullOrEmpty(path) || Util.isNullOrEmpty(content)) {
+        if (Types.isNullOrEmpty(path) || Types.isNullOrEmpty(content)) {
             return;
         }
         Files.write(Paths.get(path), content.getBytes());

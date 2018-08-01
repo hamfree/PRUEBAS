@@ -1,4 +1,4 @@
-package name.ruiz.juanfco.inicio;
+package name.ruiz.juanfco.pruebas.consola;
 
 /**
  *

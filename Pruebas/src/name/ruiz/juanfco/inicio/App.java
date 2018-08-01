@@ -16,6 +16,7 @@ import name.ruiz.juanfco.numeros.TiposNumericos;
 import name.ruiz.juanfco.pruebas.CuatroObjetos;
 import static name.ruiz.juanfco.texto.ConvertidorStrings.printBytes;
 import name.ruiz.juanfco.texto.EjemploLocale;
+import name.ruiz.juanfco.utiles.IO;
 import name.ruiz.juanfco.utiles.Util;
 
 /**
@@ -147,7 +148,7 @@ public class App {
     }
 
     /**
-     * Realiza el test del método imp() de la clase Util
+     * Realiza el test del método prt() de la clase Util
      */
     public void testImp() {
         try {
@@ -184,33 +185,33 @@ public class App {
             try {
                 System.out.println(SL);
                 System.out.println("Usando imp() con el objeto Console:");
-                Util.imp(true, "\tcadena en utf_8 ..........: '", s_utf8, "'");
+                IO.prt(true, "\tcadena en utf_8 ..........: '", s_utf8, "'");
                 System.out.println(SL);
-                Util.imp(true, "\tcadena en windows_1252 ...: '", s_w1252, "'");
+                IO.prt(true, "\tcadena en windows_1252 ...: '", s_w1252, "'");
                 System.out.println(SL);
                 System.out.println("Mostrando distintos tipos de datos con imp():");
-                Util.imp(true, entero, SP, real, SP, car, SP, bd, SP, persona);
-            } catch (Exception e) {
+                IO.prt(true, entero, SP, real, SP, car, SP, bd, SP, persona);
+            } catch (IllegalArgumentException e) {
                 Logger.getLogger(App.class.getName()).log(Level.WARNING, e.getLocalizedMessage());
             }
 
             try {
                 System.out.println(SL);
                 System.out.println("Usando imp() con System.out.format():");
-                Util.imp(false, "\tcadena en utf_8 ..........: '", s_utf8, "'");
+                IO.prt(false, "\tcadena en utf_8 ..........: '", s_utf8, "'");
                 System.out.println(SL);
-                Util.imp(false, "\tcadena en windows_1252 ...: '", s_w1252, "'");
+                IO.prt(false, "\tcadena en windows_1252 ...: '", s_w1252, "'");
                 System.out.println(SL);
                 System.out.println("Mostrando distintos tipos de datos con imp():");
-                Util.imp(false, entero, SP, real, SP, car, SP, bd, SP, persona);
-            } catch (Exception ex) {
+                IO.prt(false, entero, SP, real, SP, car, SP, bd, SP, persona);
+            } catch (IllegalArgumentException ex) {
                 Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             System.out.println("\nProvocamos un error pasando null como arg....");
             try {
-                Util.imp(true, (Object) null);
-            } catch (Exception ex) {
+                IO.prt(true, (Object) null);
+            } catch (IllegalArgumentException ex) {
                 Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (UnsupportedEncodingException ex) {
@@ -228,13 +229,13 @@ public class App {
         StringBuilder sb = new StringBuilder();
 
         try {
-            Util.imp(true, "Dime tu nombre: ");
-            nombre = Util.read(true);
-            Util.imp(true, "Dime tu primer apellido: ");
-            primerApellido = Util.read(true);
-            Util.imp(true, "Teclea tu edad: ");
-            edad = Util.read(true);
-            Util.imp(true, SL);
+            IO.prt(true, "Dime tu nombre: ");
+            nombre = IO.read(true);
+            IO.prt(true, "Dime tu primer apellido: ");
+            primerApellido = IO.read(true);
+            IO.prt(true, "Teclea tu edad: ");
+            edad = IO.read(true);
+            IO.prt(true, SL);
             if (nombre.length() > 0) {
                 sb.append("Tu nombre es '").append(nombre).append("'.");
             } else {
@@ -252,8 +253,8 @@ public class App {
             } else {
                 sb.append("No has introducido tu edad.");
             }
-            Util.imp(true, sb.toString());
-            Util.imp(true, SL);
+            IO.prt(true, sb.toString());
+            IO.prt(true, SL);
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -265,11 +266,10 @@ public class App {
     public void testGetAllCharsets() {
         try {
             StringBuilder sb = new StringBuilder();
-            Util u = new Util();
             ArrayList<Charset> al;
 
-            al = (ArrayList<Charset>) u.getAllCharsets();
-            Util.imp(false, "Juegos de caracteres disponibles de la JVM:");
+            al = (ArrayList<Charset>) Util.getAllCharsets();
+            IO.prt(false, "Juegos de caracteres disponibles de la JVM:");
             Iterator iter = al.iterator();
             int i = 1;
             while (iter.hasNext()) {
@@ -277,8 +277,8 @@ public class App {
                 cs = (Charset) iter.next();
                 sb.append(i++).append(" ").append(cs.displayName()).append(SL);
             }
-            Util.imp(false, sb.toString());
-        } catch (Exception e) {
+            IO.prt(false, sb.toString());
+        } catch (IllegalArgumentException e) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
         }
     }
