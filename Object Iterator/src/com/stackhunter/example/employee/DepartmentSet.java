@@ -14,6 +14,7 @@ import java.util.Set;
  * @author hamfree
  */
 public class DepartmentSet {
+
     private long deptId;
     private String name;
     private final Set<Employee> employeeSet = new LinkedHashSet<>();

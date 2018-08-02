@@ -13,6 +13,7 @@ import java.util.Map;
  * @author hamfree
  */
 public class DepartmentMap {
+
     private long deptId;
     private String name;
     private final Map<Long, Employee> employeeMap = new LinkedHashMap<>();

@@ -119,3 +119,6 @@ Pruebas/.vscode/launch.json
 /misc-DesktopDemoProject/build/
 Importacion Municipios/nbproject/private/
 /Object Iterator/nbproject/private/
+Object Iterator/dist/README.TXT
+Object Iterator/nbproject/configs/ObjectIteratorExample.properties
+Object Iterator/nbproject/configs/StringGeneratorExample.properties
