@@ -1,15 +1,14 @@
 package com.stackhunter.example.employee;
 
-
 public class Employee {
 
     private long id;
     private String firstName;
     private String lastName;
-    
+
     public Employee() {
     }
-    
+
     public Employee(long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;

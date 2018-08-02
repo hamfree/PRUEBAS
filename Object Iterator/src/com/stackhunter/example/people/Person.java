@@ -27,15 +27,15 @@ public class Person {
         return this;
     }
 
-    public Person addFriends(Person ... friends) {
+    public Person addFriends(Person... friends) {
         if (friends == null) {
             return this;
         }
-        
+
         if (this.friends == null) {
             this.friends = new ArrayList<>(friends.length);
         }
-        
+
         this.friends.addAll(Arrays.asList(friends));
         return this;
     }

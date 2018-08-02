@@ -1,10 +1,9 @@
 package com.stackhunter.example.employee;
 
-
 public class Manager extends Employee {
 
     private double budget;
-    
+
     public Manager() {
     }
 
@@ -16,7 +15,7 @@ public class Manager extends Employee {
     public double getBudget() {
         return budget;
     }
-    
+
     public Manager setBudget(double budget) {
         this.budget = budget;
         return this;

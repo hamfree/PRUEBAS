@@ -10,6 +10,7 @@ package com.stackhunter.example.employee;
  * @author hamfree
  */
 public class DepartmentArray {
+
     private long deptId;
     private String name;
     private Employee[] employees;
@@ -44,6 +45,7 @@ public class DepartmentArray {
     public Employee[] getEmployees() {
         return employees;
     }
+
     public DepartmentArray setEmployees(Employee... employees) {
         this.employees = employees;
         return this;
