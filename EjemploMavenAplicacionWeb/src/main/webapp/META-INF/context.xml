@@ -1,2 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/EjemploMavenAplicacionWeb"/>
+<Context path="/EjemploMavenAplicacionWeb">
+    <Resource name="bean/MyBeanFactory" auth="Container"
+              type="com.acme.beans.MyBean"
+              factory="org.apache.naming.factory.BeanFactory"
+              bar="23">
+    </Resource>
+    <Resource name="bean/MyBeanFactory2" auth="Container"
+              type="com.acme.beans.MyBean2"
+              factory="org.apache.naming.factory.BeanFactory"
+              forceString="local,remote=host"
+              local="localhost"
+              remote="tomcat.apache.org">
+    </Resource>
+    <Resource name="mail/Session" auth="Container"
+              type="javax.mail.Session"
+              mail.smtp.starttls.enable="true"
+              mail.smtp.host="smtp.gmail.com"
+              mail.user="singularidad.cuantica@gmail.com"
+              mail.password="melotragotod0"
+              mail.smtp.port="587"
+              mail.smtp.auth="true">
+    </Resource>
+</Context>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>MyBeanServlet</servlet-name>
+        <servlet-class>com.acme.servlets.MyBeanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyBean2Servlet</servlet-name>
+        <servlet-class>com.acme.servlets.MyBean2Servlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendMailServlet</servlet-name>
+        <servlet-class>com.acme.servlets.SendMailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyBeanServlet</servlet-name>
+        <url-pattern>/MyBeanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyBean2Servlet</servlet-name>
+        <url-pattern>/MyBean2Servlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMailServlet</servlet-name>
+        <url-pattern>/SendMailServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <resource-ref>
+        <description>Referencia de recurso a una factoría para instancias de
+            javax.mail.Session que pueden ser usadas para enviar mensajes de
+            correo electrónico, preconfigurados para conectar al servidor
+            SMTP apropiado.
+        </description>
+        <res-ref-name>mail/Session</res-ref-name>
+        <res-type>javax.mail.Session</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+    <resource-env-ref>
+        <description>Objeto factoría para instancias MyBean.</description>
+        <resource-env-ref-name>bean/MyBeanFactory</resource-env-ref-name>
+        <resource-env-ref-type>com.acme.beans.MyBean</resource-env-ref-type>
+    </resource-env-ref>
+    <resource-env-ref>
+        <description>Otro Objeto factoría para la instancia MyBean2.</description>
+        <resource-env-ref-name>bean/MyBeanFactory2</resource-env-ref-name>
+        <resource-env-ref-type>com.acme.beans.MyBean2</resource-env-ref-type>
+    </resource-env-ref>
+</web-app>
