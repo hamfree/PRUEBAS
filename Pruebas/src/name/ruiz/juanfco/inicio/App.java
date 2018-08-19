@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import name.ruiz.juanfco.beans.Persona;
 import name.ruiz.juanfco.entradasalida.FicheroUtil;
-import name.ruiz.juanfco.numeros.TiposNumericos;
+import name.ruiz.juanfco.mail.Report;
 import name.ruiz.juanfco.pruebas.CuatroObjetos;
 import static name.ruiz.juanfco.texto.ConvertidorStrings.printBytes;
 import name.ruiz.juanfco.texto.EjemploLocale;
@@ -47,8 +47,14 @@ public class App {
 //        app.testGetAllCharsets();
 //        app.testImp();
 //        app.testRead();
-        TiposNumericos.muestraLimites();
+//        TiposNumericos.muestraLimites();
+        app.testReport();
         System.exit(0);
+    }
+
+    public void testReport() {
+        Report report = new Report();
+        report.sendMail();
     }
 
     /**
