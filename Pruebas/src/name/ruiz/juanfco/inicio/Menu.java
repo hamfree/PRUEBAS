@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import name.ruiz.juanfco.hilosyprocesos.Comando;
 import name.ruiz.juanfco.pruebas.reflexion.JarClassLoader;
 import name.ruiz.juanfco.utiles.IO;
-import name.ruiz.juanfco.utiles.Util;
 
 /**
+ * Esta clase con main debe ejecutarse desde la consola de comandos y no desde
+ * el IDE debido a la forma en que funciona la "autolocalización" de la clase.
  *
  * @author hamfree
  */
@@ -25,7 +26,6 @@ public class Menu {
     }
 
     public static void main(String[] args) {
-
         try {
             Menu m = new Menu();
             m.procesa();
@@ -36,30 +36,14 @@ public class Menu {
 
     public void procesa() throws Exception {
         URL url = getClass().getProtectionDomain().getCodeSource().getLocation();
-        StringBuilder sb = new StringBuilder();
+        Comando cmd = new Comando();
         String linea;
+        String[] args = {"*.*", "/W"};
+        int resultado;
 
-        Comando.ejecuta("CLS", (String[]) null);
-
-        if (url != null) {
-            JarClassLoader jcl = new JarClassLoader(url);
-
-            sb.append("Ruta al fichero JAR : ").append(url.getPath());
-            muestraTitulo(sb.toString());
-
-            sb.setLength(0);
-            sb.append("Lista de clases en el JAR:");
-            muestraTitulo(sb.toString());
-
-            listaClases = (ArrayList<String>) jcl.getAllClassesInJar();
-            muestraLista(listaClases);
-
-            listaClasesConMain = (ArrayList<String>) jcl.getClassesWithMainMethod(listaClases);
-            sb.setLength(0);
-            sb.append("Lista de clases con metodo main()");
-            muestraTitulo(sb.toString());
-            muestraLista(listaClasesConMain);
-        }
+        resultado = cmd.ejecuta("DIR", args);
+        System.out.println("Resultado de ejecutar el comando :" + url.toString());
+        System.out.println("url=" + url.toString());
     }
 
     public void muestraLista(ArrayList<?> lista) {
@@ -83,7 +67,30 @@ public class Menu {
         IO.prtln(true, 1, sb.toString());
         letras = sb.length();
         sb.setLength(0);
-        sb.append(Util.repiteCaracter('=', letras));
+        sb.append(IO.repiteCaracter('=', letras));
         IO.prtln(true, 2, sb.toString());
+    }
+
+    public void obtenerDatos(URL url) {
+        StringBuilder sb = new StringBuilder();
+        if (url != null) {
+            JarClassLoader jcl = new JarClassLoader(url);
+
+            sb.append("Ruta al fichero JAR : ").append(url.getPath());
+            muestraTitulo(sb.toString());
+
+            sb.setLength(0);
+            sb.append("Lista de clases en el JAR:");
+            muestraTitulo(sb.toString());
+
+            listaClases = (ArrayList<String>) jcl.getAllClassesInJar();
+            muestraLista(listaClases);
+
+            listaClasesConMain = (ArrayList<String>) jcl.getClassesWithMainMethod(listaClases);
+            sb.setLength(0);
+            sb.append("Lista de clases con metodo main()");
+            muestraTitulo(sb.toString());
+            muestraLista(listaClasesConMain);
+        }
     }
 }

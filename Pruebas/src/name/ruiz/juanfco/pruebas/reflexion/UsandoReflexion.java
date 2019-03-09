@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class UsandoReflexion {
 
-    static final Logger log = Logger.getLogger(UsandoReflexion.class.getName());
+    static final Logger LOG = Logger.getLogger(UsandoReflexion.class.getName());
     Class<? extends MiClase> objetoDeClassConInfoDeMiClase;
     Class classDelTexto;
     Class classDelNumero;
@@ -73,7 +73,7 @@ public class UsandoReflexion {
             donde está nuestra clase, seguido del nombre de la clase */
             c = Class.forName("name.ruiz.juanfco.pruebas.reflexion.MiClase");
         } catch (ClassNotFoundException ex) {
-            log.log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -85,14 +85,14 @@ public class UsandoReflexion {
             /* Si queremos obtener un atributo público */
             variableString = objetoDeClassConInfoDeMiClase.getField("unaVariableString");
         } catch (NoSuchFieldException | SecurityException ex) {
-            log.log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
         }
 
         try {
             /* Si queremos obtener un atributo, sea privado o no */
             variableInt = objetoDeClassConInfoDeMiClase.getDeclaredField("unaVariableInt");
         } catch (NoSuchFieldException | SecurityException ex) {
-            log.log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
         }
 
         /* Si queremos obtener un array con todas los atributos públicos de
@@ -110,7 +110,7 @@ public class UsandoReflexion {
             pasar cada uno de sus tipos .class en orden después del nombre */
             metodoGetString = objetoDeClassConInfoDeMiClase.getMethod("getUnaVariableString", String.class);
         } catch (NoSuchMethodException | SecurityException ex) {
-            log.log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
         }
 
         try {
@@ -118,7 +118,7 @@ public class UsandoReflexion {
             podremos pasar cada uno de sus tipos .class en orden después del nombre */
             metodoGetInt = objetoDeClassConInfoDeMiClase.getDeclaredMethod("getUnaVariableInt", int.class);
         } catch (NoSuchMethodException | SecurityException ex) {
-            log.log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
         }
 
         /* Si queremos obtener un array con todos las metodos públicos de
@@ -187,19 +187,19 @@ public class UsandoReflexion {
 
         System.out.println("Obtener el valor de un campo de la clase que es publica");
         System.out.println("-------------------------------------------------------");
-        Field variableString = null;
+        variableString = null;
         String textoObtenido = null;
         try {
             variableString = objetoDeClassConInfoDeMiClase.getField("unaVariableString");
             textoObtenido = (String) variableString.get(objetoDeMiClase);
         } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-            log.log(Level.SEVERE, null, e);
+            LOG.log(Level.SEVERE, null, e);
         }
         System.out.println("Valor de la variable de tipo String: " + textoObtenido);
 
         System.out.println("Obtener el valor de un campo de la clase que es privado");
         System.out.println("-------------------------------------------------------");
-        Field variableInt = null;
+        variableInt = null;
         int intObtenido = -1;
         try {
             variableInt = objetoDeClassConInfoDeMiClase.getDeclaredField("unaVariableInt");
@@ -207,7 +207,7 @@ public class UsandoReflexion {
             /* La convertimos en accesible */
             intObtenido = variableInt.getInt(objetoDeMiClase);
         } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-            log.log(Level.SEVERE, null, e);
+            LOG.log(Level.SEVERE, null, e);
         }
         System.out.println("Valor de la variable de tipo int: " + intObtenido);
 
@@ -222,7 +222,7 @@ public class UsandoReflexion {
                 variable.setAccessible(true);
                 valorVariable = variable.get(objetoDeMiClase);
             } catch (IllegalArgumentException | IllegalAccessException e) {
-                log.log(Level.SEVERE, null, e);
+                LOG.log(Level.SEVERE, null, e);
             }
             System.out.println("\nValor de la variable " + nombreVariable + " es: " + valorVariable);
         }

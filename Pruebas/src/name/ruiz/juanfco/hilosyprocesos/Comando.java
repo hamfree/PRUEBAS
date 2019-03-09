@@ -5,10 +5,9 @@
  */
 package name.ruiz.juanfco.hilosyprocesos;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +22,16 @@ public class Comando {
         "SETLOCAL", "SHIFT", "START", "TIME", "TITLE", "TYPE", "VER", "VERIFY",
         "VOL", "::"};
 
+    private static final Logger LOG = Logger.getLogger(Comando.class.getName());
+
+    public static String[] getCOMANDOSINTERNOS() {
+        return COMANDOSINTERNOS;
+    }
+
+    public static Logger getLOG() {
+        return LOG;
+    }
+
     public Comando() {
     }
 
@@ -32,7 +41,7 @@ public class Comando {
      * @param args
      * @return
      */
-    public static int ejecuta(String comando, String... args) {
+    public int ejecuta(String comando, String... args) {
         int resultado = 0;
         StringBuilder orden = new StringBuilder();
         try {
@@ -48,17 +57,20 @@ public class Comando {
                 }
 
                 Process p = Runtime.getRuntime().exec(orden.toString());
-                InputStream is = p.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                String aux = br.readLine();
-                while (aux != null) {
-                    System.out.println(aux);
-                    aux = br.readLine();
-                }
+                StreamWrapper stError = new StreamWrapper(p.getErrorStream(), "ERROR");
+                StreamWrapper stOutput = new StreamWrapper(p.getInputStream(), "SALIDA");
+
+                stError.start();
+                stOutput.start();
+
+                resultado = p.waitFor();
             }
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
             resultado = -1;
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Comando.class.getName()).log(Level.SEVERE, null, ex);
+            resultado = -2;
         }
         return resultado;
     }
@@ -79,4 +91,5 @@ public class Comando {
         }
         return resultado;
     }
+
 }

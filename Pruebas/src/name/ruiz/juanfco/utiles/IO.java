@@ -150,7 +150,7 @@ public class IO {
             if (longitud > longMsg) {
                 IO.prt(true, 1, "");
                 linea(car, longitud);
-                sb.append(Util.getSL());
+                sb.append(getSL());
                 int relleno = (longitud - longMsg) / 2;
                 sb.append(repiteCaracter(' ', relleno)).append(msg).append(repiteCaracter(' ', relleno));
                 IO.prt(true, 1, sb.toString());
@@ -172,10 +172,13 @@ public class IO {
     }
 
     /**
+     * Genera una cadena compuesta por el caracter <code>car</code> tantas veces
+     * como indica <code>veces</code>.
      *
-     * @param car
-     * @param veces
-     * @return
+     * @param car el caracter con el que va a estar compuesta la cadena
+     * @param veces el numero de veces que se repite el caracter en la cadena
+     * @return una cadena con el caracter <code>car</code> repetida tantas veces
+     * como indica <code>veces</code>
      */
     public static String repiteCaracter(Character car, int veces) {
         StringBuilder sb = new StringBuilder();

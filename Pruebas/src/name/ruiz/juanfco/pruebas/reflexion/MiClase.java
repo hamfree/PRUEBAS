@@ -12,7 +12,7 @@ package name.ruiz.juanfco.pruebas.reflexion;
 public class MiClase {
 
     public String unaVariableString = "Un Texto";
-    private int unaVariableInt = 5;
+    private final int unaVariableInt = 5;
 
     public String getUnaVariableString(String concatenar) {
         return unaVariableString + concatenar;
