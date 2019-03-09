@@ -25,7 +25,7 @@ public class TestUtils {
         if (msg != null && msg.length() > 0) {
             IO.prt(true, 1, "");
             IO.linea('-', 80);
-            sb.append(Util.getSL());
+            sb.append(IO.getSL());
             sb.append(msg);
             if (esInicio) {
                 sb.append("() - INICIO");

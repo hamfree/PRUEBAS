@@ -155,10 +155,10 @@ public class Converter {
     public static String array2String(Object obj) {
         StringBuilder result = null;
         if (obj == null) {
-            return Util.getNULL();
+            return IO.getNULL();
         }
         if (isArray(obj)) {
-            result = new StringBuilder(Util.getCAR_INI());
+            result = new StringBuilder(IO.getCAR_INI());
             int length = Array.getLength(obj);
             for (int idx = 0; idx < length; ++idx) {
                 Object item = Array.get(obj, idx);
@@ -169,10 +169,10 @@ public class Converter {
                     result.append(item);
                 }
                 if (!isLastElement(idx, length)) {
-                    result.append(Util.getSEP());
+                    result.append(IO.getSEP());
                 }
             }
-            result.append(Util.getCAR_FIN());
+            result.append(IO.getCAR_FIN());
         } else {
             return null;
         }

@@ -26,12 +26,8 @@ import name.ruiz.juanfco.utiles.Util;
  */
 public class App {
 
-    final String SL;
-    final String SF;
 
     public App() {
-        this.SL = Util.getSL();
-        this.SF = Util.getSF();
     }
 
     /**
@@ -48,7 +44,8 @@ public class App {
 //        app.testImp();
 //        app.testRead();
 //        TiposNumericos.muestraLimites();
-        app.testReport();
+//        app.testReport();
+        app.testComaFlotante();
         System.exit(0);
     }
 
@@ -117,7 +114,7 @@ public class App {
         System.out.println("mo.getD().toString()...........: " + mo.getD().toString());
         System.out.println("mo.getC().getClass()...........: " + mo.getC().getClass());
         System.out.println("mo.getD().getClass()...........: " + mo.getD().getClass());
-        System.out.println(SL);
+        System.out.println(IO.getSL());
         System.out.println("Objetos A y B, donde B apunta al A....");
         System.out.println("mo.getA().equals(mo.getB())....: " + mo.getA().equals(mo.getB()));
         System.out.println("mo.getB().equals(mo.getA())....: " + mo.getB().equals(mo.getA()));
@@ -189,12 +186,12 @@ public class App {
 
             System.out.println(sb.toString());
             try {
-                System.out.println(SL);
+                System.out.println(IO.getSL());
                 System.out.println("Usando imp() con el objeto Console:");
                 IO.prt(true, "\tcadena en utf_8 ..........: '", s_utf8, "'");
-                System.out.println(SL);
+                System.out.println(IO.getSL());
                 IO.prt(true, "\tcadena en windows_1252 ...: '", s_w1252, "'");
-                System.out.println(SL);
+                System.out.println(IO.getSL());
                 System.out.println("Mostrando distintos tipos de datos con imp():");
                 IO.prt(true, entero, SP, real, SP, car, SP, bd, SP, persona);
             } catch (IllegalArgumentException e) {
@@ -202,12 +199,12 @@ public class App {
             }
 
             try {
-                System.out.println(SL);
+                System.out.println(IO.getSL());
                 System.out.println("Usando imp() con System.out.format():");
                 IO.prt(false, "\tcadena en utf_8 ..........: '", s_utf8, "'");
-                System.out.println(SL);
+                System.out.println(IO.getSL());
                 IO.prt(false, "\tcadena en windows_1252 ...: '", s_w1252, "'");
-                System.out.println(SL);
+                System.out.println(IO.getSL());
                 System.out.println("Mostrando distintos tipos de datos con imp():");
                 IO.prt(false, entero, SP, real, SP, car, SP, bd, SP, persona);
             } catch (IllegalArgumentException ex) {
@@ -241,26 +238,26 @@ public class App {
             primerApellido = IO.read(true);
             IO.prt(true, "Teclea tu edad: ");
             edad = IO.read(true);
-            IO.prt(true, SL);
+            IO.prt(true, IO.getSL());
             if (nombre.length() > 0) {
                 sb.append("Tu nombre es '").append(nombre).append("'.");
             } else {
                 sb.append("No has dicho tu nombre.");
             }
-            sb.append(SL);
+            sb.append(IO.getSL());
             if (primerApellido.length() > 0) {
                 sb.append("Tu apellido es '").append(primerApellido).append("'");
             } else {
                 sb.append("No has dicho tu apellido.");
             }
-            sb.append(SL);
+            sb.append(IO.getSL());
             if (edad.length() > 0) {
                 sb.append("Tu edad es de ").append(edad).append(" años.");
             } else {
                 sb.append("No has introducido tu edad.");
             }
             IO.prt(true, sb.toString());
-            IO.prt(true, SL);
+            IO.prt(true, IO.getSL());
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -281,11 +278,28 @@ public class App {
             while (iter.hasNext()) {
                 Charset cs;
                 cs = (Charset) iter.next();
-                sb.append(i++).append(" ").append(cs.displayName()).append(SL);
+                sb.append(i++).append(" ").append(cs.displayName()).append(IO.getSL());
             }
             IO.prt(false, sb.toString());
         } catch (IllegalArgumentException e) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    /**
+     * Realiza una resta de valores en coma flotante para comprobar la
+     * precision. Debería dar 1. Con Doubles no funciona. Con BigDecimal sí.
+     */
+    public void testComaFlotante() {
+        Double a = 9999999999999999.0;
+        Double b = 9999999999999998.0;
+        IO.prt(false, "Restando 9999999999999998.0 a 9999999999999999.0 usando Double...");
+        IO.prt(false, a, " - ", b, " = ", a - b);
+        IO.prtln(false, 1, "");
+        IO.prt(false, "Restando 9999999999999998.0 a 9999999999999999.0 usando BigDecimal...");
+        BigDecimal c = new BigDecimal("9999999999999999.0");
+        BigDecimal d = new BigDecimal("9999999999999998.0");
+        IO.prt(false, c, " - ", d, " = ", c.subtract(d));
+        IO.prtln(false, 1, "");
     }
 }

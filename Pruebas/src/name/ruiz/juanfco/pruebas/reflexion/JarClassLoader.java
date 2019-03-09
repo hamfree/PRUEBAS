@@ -41,6 +41,7 @@ public class JarClassLoader extends URLClassLoader {
      * Devuelve el nombre del fichero de la clase main del jar, o null si no se
      * definió un atributo "Main-Class" en el manifiesto.
      *
+     * @return
      * @throws java.io.IOException
      */
     public String getMainClassName() throws IOException {
