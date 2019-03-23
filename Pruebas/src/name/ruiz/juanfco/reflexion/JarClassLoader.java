@@ -1,4 +1,4 @@
-package name.ruiz.juanfco.pruebas.reflexion;
+package name.ruiz.juanfco.reflexion;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

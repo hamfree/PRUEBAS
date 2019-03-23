@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package name.ruiz.juanfco.inicio;
+package name.ruiz.juanfco.pruebas.hilosyprocesos;
 
 import java.net.URL;
 import java.util.ArrayList;
 import name.ruiz.juanfco.hilosyprocesos.Comando;
-import name.ruiz.juanfco.pruebas.reflexion.JarClassLoader;
-import name.ruiz.juanfco.utiles.IO;
+import name.ruiz.juanfco.reflexion.JarClassLoader;
+import name.ruiz.juanfco.consola.IO;
 
 /**
  * Esta clase con main debe ejecutarse desde la consola de comandos y no desde
@@ -17,17 +17,17 @@ import name.ruiz.juanfco.utiles.IO;
  *
  * @author hamfree
  */
-public class Menu {
+public class App {
 
     ArrayList<String> listaClases;
     ArrayList<String> listaClasesConMain;
 
-    public Menu() {
+    public App() {
     }
 
     public static void main(String[] args) {
         try {
-            Menu m = new Menu();
+            App m = new App();
             m.procesa();
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
@@ -42,7 +42,7 @@ public class Menu {
         int resultado;
 
         resultado = cmd.ejecuta("DIR", args);
-        System.out.println("Resultado de ejecutar el comando :" + url.toString());
+        System.out.println("Resultado de ejecutar el comando :" + resultado);
         System.out.println("url=" + url.toString());
     }
 

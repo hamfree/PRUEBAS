@@ -4,7 +4,7 @@ package name.ruiz.juanfco.texto;
  *
  * @author hamfree
  */
-public class UnicodeFormatter {
+public class ByteOrCharToHex {
 
     static public String byteToHex(byte b) {
         // Devuelve una cadena con la representación hexadecimal del byte

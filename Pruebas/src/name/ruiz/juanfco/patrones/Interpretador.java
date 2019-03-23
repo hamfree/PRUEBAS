@@ -1,4 +1,4 @@
-package name.ruiz.juanfco.pruebas.consola;
+package name.ruiz.juanfco.patrones;
 
 import java.util.*;
 
