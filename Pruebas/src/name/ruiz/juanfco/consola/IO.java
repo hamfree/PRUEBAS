@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package name.ruiz.juanfco.utiles;
+package name.ruiz.juanfco.consola;
 
 import java.io.Console;
 import java.util.Scanner;
 import java.util.logging.Logger;
+import name.ruiz.juanfco.utiles.Types;
 
 /**
  *

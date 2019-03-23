@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package name.ruiz.juanfco.vista;
+package name.ruiz.juanfco.pruebas.vista;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import name.ruiz.juanfco.vista.Vista;
+import name.ruiz.juanfco.vista.Vista;
+import name.ruiz.juanfco.vista.VistaImpl;
 import name.ruiz.juanfco.vista.VistaImpl;
 
 /**
  *
  * @author hamfree
  */
-public class TestVista {
+public class App {
 
     private final static String[] PARAMS = {"exploraObjeto",
         "exploraVector",
@@ -64,7 +66,7 @@ public class TestVista {
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder();
 
-        TestVista tv = new TestVista();
+        App tv = new App();
         if (args.length > 0) {
             if (args[0] != null) {
                 if (args[0].equalsIgnoreCase(PARAMS[0])) {
@@ -93,7 +95,7 @@ public class TestVista {
     /**
      * Constructor del Test, que ademas inicializa todas las variables de prueba
      */
-    public TestVista() {
+    public App() {
 
         v = new VistaImpl();
 

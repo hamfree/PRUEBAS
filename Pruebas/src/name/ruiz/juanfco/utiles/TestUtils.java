@@ -5,6 +5,8 @@
  */
 package name.ruiz.juanfco.utiles;
 
+import name.ruiz.juanfco.consola.IO;
+
 /**
  * Utilidades que facilitan el trabajo con las pruebas.
  *

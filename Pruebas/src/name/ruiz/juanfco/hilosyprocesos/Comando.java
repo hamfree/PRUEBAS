@@ -57,8 +57,8 @@ public class Comando {
                 }
 
                 Process p = Runtime.getRuntime().exec(orden.toString());
-                StreamWrapper stError = new StreamWrapper(p.getErrorStream(), "ERROR");
-                StreamWrapper stOutput = new StreamWrapper(p.getInputStream(), "SALIDA");
+                EncapsuladorFlujo stError = new EncapsuladorFlujo(p.getErrorStream(), "ERROR");
+                EncapsuladorFlujo stOutput = new EncapsuladorFlujo(p.getInputStream(), "SALIDA");
 
                 stError.start();
                 stOutput.start();

@@ -7,7 +7,7 @@ import java.util.Arrays;
  * Aplicación simple de consola interactiva. Usa la clase java.io.Console de
  * * Java 6.
  */
-public final class ConsoleApp {
+public final class App {
 
     public static final void main(String... aArgs) {
         Console consola = System.console();

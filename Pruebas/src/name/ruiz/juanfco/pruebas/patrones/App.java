@@ -1,4 +1,4 @@
-package name.ruiz.juanfco.pruebas.consola;
+package name.ruiz.juanfco.pruebas.patrones;
 
 /**
  *
@@ -10,13 +10,13 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import name.ruiz.juanfco.pruebas.consola.Interpretador;
+import name.ruiz.juanfco.patrones.Interpretador;
 
 /**
  * Envía texto de ida y vuelta entre la línea de comando y un intérprete. Para
  * versiones de JDK menores que la 6.
  */
-public final class Consola {
+public final class App {
 
     /**
      * Construye y lanza un <code>Interpretador</code> especifico, cuyo nombre
@@ -28,7 +28,7 @@ public final class Consola {
         try {
             Class laClase = Class.forName(argumentos[0]);
             Interpretador interpretador = (Interpretador) laClase.newInstance();
-            Consola consola = new Consola(interpretador);
+            App consola = new App(interpretador);
             consola.ejecuta();
         } catch (ClassNotFoundException ex) {
             System.err.println(ex + " La clase Interpretador debe estar en la ruta de clases.");
@@ -40,7 +40,7 @@ public final class Consola {
         }
     }
 
-    public Consola(Interpretador unInterpretador) {
+    public App(Interpretador unInterpretador) {
         if (unInterpretador == null) {
             throw new IllegalArgumentException("No puede ser null.");
         }

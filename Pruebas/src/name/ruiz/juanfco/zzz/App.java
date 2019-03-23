@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package name.ruiz.juanfco.pruebas.reflexion;
+package name.ruiz.juanfco.zzz;
 
+import name.ruiz.juanfco.beans.MiClase;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -17,9 +18,9 @@ import java.util.logging.Logger;
  *
  * @author hamfree
  */
-public class UsandoReflexion {
+public class App {
 
-    static final Logger LOG = Logger.getLogger(UsandoReflexion.class.getName());
+    static final Logger LOG = Logger.getLogger(App.class.getName());
     Class<? extends MiClase> objetoDeClassConInfoDeMiClase;
     Class classDelTexto;
     Class classDelNumero;
@@ -37,13 +38,13 @@ public class UsandoReflexion {
     Constructor[] todosLosConstructores;
     Constructor[] todosLosConstructoresDeclarados;
 
-    public UsandoReflexion() {
+    public App() {
     }
 
     public static void main(String[] args) {
         MiClase objetoDeMiClase = new MiClase();
 
-        UsandoReflexion ur = new UsandoReflexion();
+        App ur = new App();
 
         ur.obtenerReferenciasClass(objetoDeMiClase);
         ur.obtenerCamposDeMiClase();

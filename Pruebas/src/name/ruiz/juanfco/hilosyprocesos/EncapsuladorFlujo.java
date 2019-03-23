@@ -17,21 +17,21 @@ import java.util.logging.Logger;
  *
  * @author hamfree
  */
-public class StreamWrapper extends Thread {
+public class EncapsuladorFlujo extends Thread {
 
     private InputStream is;
-    private String type;
+    private String tipo;
     private OutputStream os;
-    private static final Logger LOG = Logger.getLogger(StreamWrapper.class.getName());
+    private static final Logger LOG = Logger.getLogger(EncapsuladorFlujo.class.getName());
 
-    StreamWrapper(InputStream is, String type) {
-        this(is, type, null);
+    EncapsuladorFlujo(InputStream is, String tipo) {
+        this(is, tipo, null);
     }
 
-    StreamWrapper(InputStream is, String type, OutputStream redirect) {
+    EncapsuladorFlujo(InputStream is, String tipo, OutputStream redirigido) {
         this.is = is;
-        this.type = type;
-        this.os = redirect;
+        this.tipo = tipo;
+        this.os = redirigido;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class StreamWrapper extends Thread {
                 if (pw != null) {
                     pw.println(line);
                 }
-                System.out.println(type + ">" + line);
+                System.out.println(tipo + ">" + line);
             }
             if (pw != null) {
                 pw.flush();
