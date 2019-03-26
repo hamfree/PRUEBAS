@@ -1,0 +1,8 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Para uso interno.
+${licensePrefix}Proyecto de aprendizaje y pruebas
+<#if licenseLast??>
+${licenseLast}
+</#if>
