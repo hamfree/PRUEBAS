@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties>
+        <property name="driver" value="oracle.jdbc.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:test/welcome1@//elsuper:1521/orcl"/>
+        <property name="username" value="test"/>
+        <property name="password" value="welcome1"/>
+    </properties>
+    <settings>
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+    <typeAliases>
+        <package name="es.nom.juanfranciscoruiz.mybatisdemo.model"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="Oracle" value="oracle" />
+    </databaseIdProvider>
+    <mappers>
+        <package name="es.nom.juanfranciscoruiz.mybatisdemo.mappers"/>
+    </mappers>
+</configuration>
