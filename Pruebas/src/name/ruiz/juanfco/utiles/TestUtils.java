@@ -5,6 +5,8 @@
  */
 package name.ruiz.juanfco.utiles;
 
+import name.ruiz.juanfco.consola.IO;
+
 /**
  * Utilidades que facilitan el trabajo con las pruebas.
  *
@@ -25,7 +27,7 @@ public class TestUtils {
         if (msg != null && msg.length() > 0) {
             IO.prt(true, 1, "");
             IO.linea('-', 80);
-            sb.append(Util.getSL());
+            sb.append(IO.getSL());
             sb.append(msg);
             if (esInicio) {
                 sb.append("() - INICIO");
