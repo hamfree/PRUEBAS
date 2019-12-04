@@ -91,34 +91,71 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/java,maven,gradle,grails
 
-# Exclusiones varias
-/EjemplosTutorialJava/src/tutorial/deployment/doingMoreWithRIA/examples/applet_AccessingCookies/dist/
-/EjemplosTutorialJava/src/tutorial/uiswing/examples/QandE/Beeper1Project/nbproject/private/
-/Pruebas/dist/
-/Pruebas/build/
-/Pruebas/nbproject/private/
-Pruebas/nbproject/private/private.xml
-Pruebas/nbproject/private/private.properties
-Pruebas/nbproject/private/config.properties
-Pruebas/.vscode/launch.json
-/prueba/nbproject/
-TMP/
-/EjemplosTutorialJava/nbproject/private/
-/GroovyJavaDemo/nbproject/private/
-/Dummy/nbproject/private/
-/EjemploMavenAplicacionWeb/target/
-/GroovyJavaDemo/build/
-/HolaMundo/build/
-/MavenEnterpriseApp/MavenEnterpriseApp-ejb/target/
-/MavenEnterpriseApp/MavenEnterpriseApp-web/target/
-/mavenproject1/target/
-/SpringDemo/target/
-/Pruebas/build/
-Pruebas/.vscode/launch.json
-/misc-DesktopDemoProject/nbproject/private/
-/misc-DesktopDemoProject/build/
-Importacion Municipios/nbproject/private/
-/Object Iterator/nbproject/private/
-Object Iterator/dist/README.TXT
-Object Iterator/nbproject/configs/ObjectIteratorExample.properties
-Object Iterator/nbproject/configs/StringGeneratorExample.properties
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Annotation Processing
+.apt_generated/
+.apt_generated_test/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+# Netbeans
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
