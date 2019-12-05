@@ -4,20 +4,14 @@
  */
 package es.nom.juanfranciscoruiz.mybatisdemo.app;
 
-import es.nom.juanfranciscoruiz.mybatisdemo.mappers.CustomerMapper;
 import es.nom.juanfranciscoruiz.mybatisdemo.model.Customer;
-import java.io.IOException;
-import java.io.InputStream;
+import es.nom.juanfranciscoruiz.mybatisdemo.service.CustomerService;
+import es.nom.juanfranciscoruiz.mybatisdemo.service.CustomerServiceImpl;
+import es.nom.juanfranciscoruiz.mybatisdemo.util.IO;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 /**
  *
@@ -32,65 +26,38 @@ public class App {
     }
 
     public void ejecuta() {
-        InputStream inputStream = null;
-        try {
-            String resource = "mybatis-config.xml";
-            inputStream = Resources.getResourceAsStream(resource);
-            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        String resource = "mybatis-config.xml";
 
-            SqlSession session = sqlSessionFactory.openSession();
-            try {
-                CustomerMapper mapper = session.getMapper(CustomerMapper.class);
+        CustomerService customerService = new CustomerServiceImpl(resource);
 
-                System.out.println("");
-                for (int i = 1; i < 1000; i++) {
-                    Customer c = new Customer();
-                    c.setAddress(String.valueOf(i * i));
-                    c.setName(new UUID(new Random().nextLong(), new Random().nextLong()).toString());
-                    c.setWebsite(String.valueOf(Math.pow(i, i)));
-                    c.setCredit_limit(BigDecimal.valueOf(new Double(i * 2)));
-                    System.out.println(c.toString());
-                    mapper.insertCustomer(c);
-                }
+        IO.prtln(false, 2, "Se van a insertar 100 objetos Customers...");
+        for (int i = 1; i < 100; i++) {
+            Customer c = new Customer();
+            c.setAddress(String.valueOf(i * i));
+            c.setName(new UUID(new Random().nextLong(), new Random().nextLong()).toString());
+            c.setWebsite(String.valueOf(Math.pow(i, i)));
+            c.setCredit_limit(BigDecimal.valueOf(new Double(i * 2)));
+            customerService.insertCostumer(c);
+        }
 
-                session.commit();
+        IO.prtln(false, 2, "Despues del insert...");
 
-                System.out.println("");
-                System.out.println("Despues del insert...");
-                System.out.println("");
+        List<Customer> customers = customerService.selectAllCustomers();
 
-                muestraTodosLosClientes(mapper);
+        muestraTodosLosClientes(customers);
 
-            } finally {
-                session.close();
-            }
+    }
 
-        } catch (IOException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            }
+    void muestraUnCliente(Customer customer) {
+        if (customer != null) {
+            IO.prtln(false, 2, customer.toString());
         }
     }
 
-    void muestraUnCliente(CustomerMapper mapper, Long id) {
-        List<Customer> customers = mapper.selectCustomerById(id);
+    void muestraTodosLosClientes(List<Customer> customers) {
         if (customers != null && customers.size() > 0) {
             for (Customer c : customers) {
-                System.out.println(c.toString());
-            }
-        }
-
-    }
-
-    void muestraTodosLosClientes(CustomerMapper mapper) {
-        List<Customer> allcustomers = mapper.selectAllCustomers();
-        if (allcustomers != null && allcustomers.size() > 0) {
-            for (Customer c : allcustomers) {
-                System.out.println(c.toString());
+                IO.prtln(false, 1, c.toString());
             }
         }
     }
