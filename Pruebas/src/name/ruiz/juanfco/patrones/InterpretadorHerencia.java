@@ -19,7 +19,7 @@ public final class InterpretadorHerencia implements Interpretador {
      * @exception IllegalArgumentException si un parametro no cumple.
      */
     @Override
-    public boolean analizaEntrada(String unaLinea, final List unResultado) {
+    public boolean analizaEntrada(String unaLinea, final List<Object> unResultado) {
         if (unResultado == null) {
             throw new IllegalArgumentException("El parametro de resultado no puede ser nulo.");
         }

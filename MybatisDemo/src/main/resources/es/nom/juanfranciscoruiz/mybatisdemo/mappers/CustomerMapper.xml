@@ -9,12 +9,12 @@
     <select id="selectAllCustomers" resultType="customer">
         select * from customers order by customer_id desc
     </select>
-
     <insert id="insertCustomer" parameterType="customer">
         <selectKey keyProperty="customer_id" resultType="int" order="BEFORE">
             select ISEQ$$_74171.nextval as customer_id from dual
         </selectKey>
         insert into customers (customer_id,name,address,website,credit_limit)
-        values (#{customer_id},#{name},#{address},#{website,jdbcType=VARCHAR},#{credit_limit})
+        values (#{customer_id},#{name},#{address,jdbcType=VARCHAR},
+                #{website,jdbcType=VARCHAR},#{credit_limit,jdbcType=NUMERIC})
     </insert>
 </mapper>

@@ -7,9 +7,9 @@ package name.ruiz.juanfco.pruebas.hilosyprocesos;
 
 import java.net.URL;
 import java.util.ArrayList;
+import name.ruiz.juanfco.consola.IO;
 import name.ruiz.juanfco.hilosyprocesos.Comando;
 import name.ruiz.juanfco.reflexion.JarClassLoader;
-import name.ruiz.juanfco.consola.IO;
 
 /**
  * Esta clase con main debe ejecutarse desde la consola de comandos y no desde
@@ -50,9 +50,11 @@ public class App {
         if (lista != null && !lista.isEmpty()) {
             for (Object o : lista) {
                 Class clazz = o.getClass();
-                if (clazz.isAssignableFrom(String.class)) {
-                    String s = (String) o;
+                String s = new String();
+                if (clazz.isInstance(s)) {
+                    s = (String) o;
                     System.out.println(s);
+                } else {
                 }
             }
             System.out.println(System.getProperty("line.separator"));

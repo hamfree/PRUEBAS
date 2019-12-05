@@ -27,9 +27,9 @@ public class App {
     public void ejecuta(String arg) {
         try {
             StringBuilder sb = new StringBuilder();
-            ReflexionUtil rflx = new ReflexionUtil(arg);
+            ReflexionUtil rflx = new ReflexionUtil();
 
-            rflx.extraerDatosClase(true, true, true, false, false, sb);
+            rflx.dameDatosClase(arg.getClass(), true, true, true, false, false, sb);
 
             IO.prtln(false, 1, sb.toString());
 

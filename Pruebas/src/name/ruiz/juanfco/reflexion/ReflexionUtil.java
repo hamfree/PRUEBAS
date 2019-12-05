@@ -5,11 +5,16 @@
  */
 package name.ruiz.juanfco.reflexion;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,19 +24,15 @@ import java.util.logging.Logger;
  */
 public class ReflexionUtil {
 
-    private final String SL = System.getProperty("line.separator");
-    private Class laClase;
+    private static final String SL = System.getProperty("line.separator");
     private static final Logger LOGGER = Logger.getLogger(ReflexionUtil.class.getName());
+    private static final String EXTENSION_FICHERO_CLASE = ".class";
 
-    public ReflexionUtil(String theClass) {
-        try {
-            this.laClase = Class.forName(theClass);
-        } catch (ClassNotFoundException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-        }
+    public ReflexionUtil() {
     }
 
-    public Class extraerDatosClase(boolean conAtributos,
+    public static Class dameDatosClase(Class laClase,
+            boolean conAtributos,
             boolean conConstructores,
             boolean conMetodos,
             boolean conAnotaciones,
@@ -39,7 +40,7 @@ public class ReflexionUtil {
             StringBuilder sb) throws Exception {
         try {
             String tipo;
-            //TODO: Pôsibles anotaciones de clase
+            //TODO: Posibles anotaciones de clase
 
             sb.setLength(0);
 
@@ -102,15 +103,15 @@ public class ReflexionUtil {
             sb.append(" {").append(SL);
 
             if (conAtributos) {
-                extraerAtributos(sb, conAnotaciones);
+                dameCampos(laClase, sb, conAnotaciones);
             }
 
             if (conConstructores) {
-                extraerConstructores(sb, conAnotaciones);
+                dameConstructores(laClase, sb, conAnotaciones);
             }
 
             if (conMetodos) {
-                extraerMetodos(sb, conAnotaciones);
+                dameMetodos(laClase, sb, conAnotaciones);
             }
 
             sb.append("}");
@@ -120,7 +121,9 @@ public class ReflexionUtil {
         return laClase;
     }
 
-    public Field[] extraerAtributos(StringBuilder sb, boolean conAnotaciones) throws Exception {
+    public static Field[] dameCampos(Class laClase,
+            StringBuilder sb,
+            boolean conAnotaciones) throws Exception {
         Field[] usuarioFields = null;
         try {
             usuarioFields = laClase.getDeclaredFields();
@@ -160,7 +163,9 @@ public class ReflexionUtil {
         return usuarioFields;
     }
 
-    public Constructor[] extraerConstructores(StringBuilder sb, boolean conAnotaciones) throws Exception {
+    public static Constructor[] dameConstructores(Class laClase,
+            StringBuilder sb,
+            boolean conAnotaciones) throws Exception {
         Constructor[] constructores = null;
         try {
             constructores = laClase.getDeclaredConstructors();
@@ -227,7 +232,9 @@ public class ReflexionUtil {
         return constructores;
     }
 
-    public Method[] extraerMetodos(StringBuilder sb, boolean conAnotaciones) throws Exception {
+    public static Method[] dameMetodos(Class laClase,
+            StringBuilder sb,
+            boolean conAnotaciones) throws Exception {
         Method[] metodos = null;
         try {
             metodos = laClase.getDeclaredMethods();
@@ -310,4 +317,102 @@ public class ReflexionUtil {
         }
         return metodos;
     }
+
+    public static boolean contieneMetodoMain(Class clase) throws Exception {
+        try {
+            if (clase != null) {
+                Method[] metodos = dameMetodos(clase, null, false);
+                for (Method metodo : metodos) {
+                    if (metodo.getName().equalsIgnoreCase("main")) {
+                        return true;
+                    }
+                }
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ReflexionUtil.class.getName()).log(Level.SEVERE, null, ex);
+            throw new Exception(ex.getMessage(), ex);
+        }
+        return false;
+    }
+
+    /**
+     * Devuelve una colección de todas las Clases dentro de un paquete dado y
+     * los subpaquetes. Tenga en cuenta que este método se basa en que las
+     * clases esten en archivos de clase (no en ficheros JAR) en un solo
+     * directorio.
+     *
+     * @param nombrePaquete Nombre completamente cualificado del paquete. Ej:
+     * "com.example.foo"
+     * @return una colección de todas los objetos Class dentro del paquete dado
+     * y de sus subpaquetes.
+     * @throws FileNotFoundException si el nombre del paquete no es válido.
+     */
+    public static List<Class> dameClasesEnPaquete(String nombrePaquete) throws
+            FileNotFoundException {
+        // Esperamos encontrar las clases en un directorio del sistema de
+        // ficheros con un nombre que se corresponde al nombre del paquete.
+        String nombreDirectorio = nombrePaquete.replace('.', '/');
+
+        // Intentamos encontrar este dirctorio en el camino de clases.
+        // Tenga en cuenta que sólo esperamos uno de esos directorios.
+        URL urlPackageDirectory = ClassLoader.getSystemClassLoader().getResource(nombreDirectorio);
+        if (urlPackageDirectory == null) {
+            throw new FileNotFoundException("No puede encontrar el directorio '"
+                    + nombreDirectorio + "' en los caminos de clase.");
+        }
+        File directorio = new File(urlPackageDirectory.getFile());
+        List<Class> clases = new ArrayList<>();
+        // Encuentra todos los ficheros de clases en este directorio y sus subdirectorios.
+        dameClasesRecursivamente(nombrePaquete, directorio, clases);
+        return clases;
+    }
+
+    /**
+     * Actualiza la lista de clases dada con los ficheros de clases en el
+     * directorio y subdirectorios dado del sistema de archivos.
+     *
+     * @param nombrePaquete El nombre del paquete correspondiente al directorio
+     * dado.
+     * @param directorio El directorio de donde extraer los ficheros de clases.
+     * @param listaClases La lista de clases encontradas. Se le agregan
+     * recursivamente.
+     */
+    private static void dameClasesRecursivamente(String nombrePaquete, File directorio,
+            List<Class> listaClases) {
+        // Bucle sobre los contenidos de este directorio:
+        File[] ficherosHijo = directorio.listFiles();
+        for (File ficheroHijo : ficherosHijo) {
+            if (ficheroHijo.isFile()) {
+                String nombreFichero = ficheroHijo.getName();
+                // Solo queremos los ficheros .class
+                if (nombreFichero.endsWith(EXTENSION_FICHERO_CLASE)) {
+                    // Eliminamos la extensión .class para obtener el nombre de la clase.
+                    String className = nombreFichero.substring(0, nombreFichero.length()
+                            - EXTENSION_FICHERO_CLASE.length());
+                    Class c = null;
+                    try {
+                        c = Class.forName(nombrePaquete + '.' + className);
+                        listaClases.add(c);
+                    } catch (ClassNotFoundException | NoClassDefFoundError ex) {
+                        // Esto no debería ocurrir ya que estamos encontrando las clases en un
+                        // directorio de nuestro camino de clases, aunque si estamos en
+                        // una ejecución "mixta" con algunas clases cargadas de ficheros
+                        // class en el sistema de ficheros y otras de un fichero JAR como
+                        // las de las librerías que necesita la aplicación podría darse.
+                        // Vamos a ignorarlo...
+                        Logger.getLogger(ReflexionUtil.class.getName()).log(Level.SEVERE, null, ex);
+                        c = null;
+                        //throw new RuntimeException(ex);
+                    }
+                }
+            } else if (ficheroHijo.isDirectory()) {
+                // Ingresamos recursivamente dentro de este subdirectorio
+                dameClasesRecursivamente(nombrePaquete + '.' + ficheroHijo.getName(),
+                        ficheroHijo, listaClases);
+            }
+        }
+    }
+
 }
