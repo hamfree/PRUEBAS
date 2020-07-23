@@ -16,6 +16,10 @@ import java.util.logging.SimpleFormatter;
 import es.nom.juanfranciscoruiz.consola.IO;
 import es.nom.juanfranciscoruiz.reflexion.JarClassLoader;
 import es.nom.juanfranciscoruiz.reflexion.ReflexionUtil;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
 
 /**
  * Clase principal de la aplicacion, desde la que se obtienen dinamicamente el
@@ -33,226 +37,362 @@ import es.nom.juanfranciscoruiz.reflexion.ReflexionUtil;
  * @author hamfree
  */
 public class App {
-	private final String RUTALOG = "C:\\des\\data\\log\\";
 
-	public App() {
+    private final String RUTALOG = "C:\\des\\data\\log\\";
+    private static final Logger LOG = Logger.getLogger(App.class.getName());
+    private String[] msgs = {
+        "Protocolo -> ",
+        "Listado de clases con metodo main()",
+        "Listado de instancias de metodos main()",
+        "Error: no se han encontrado métodos main() en las instancias de clase",
+        "Error: no se han instancias de clase a partir de sus nombres canonicos",
+        "No he encontrado clases con metodo main()",
+        "Hilo actual -> ",
+        "Nombre de la clase actual -> ",
+        "Ruta relativa de la clase -> ",
+        "Objeto URL obtenido con el cargador de clases de contexto -> ",
+        "No he podido obtener la URL.",
+        "Spec -> ",
+        "Nombre del paquete -> "
+    };
 
-	}
+    private Map<String, Boolean> opciones = new Hashtable<>();
+    private List<String> errores = new ArrayList<>();
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String[] args) {
-		int salida = 0;
-		App app = new App();
-		try {
-			app.configuraLog();
-			salida = app.ejecutar();
-		} catch (Exception ex) {
-			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-			throw new RuntimeException(ex.getMessage(), ex);
-		}
-		System.exit(salida);
-	}
+    private boolean muestraMensajes;
+    private boolean muestraAyuda;
+    private boolean generaLog;
 
-	/**
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public int ejecutar() throws Exception {
-		int resultado = 0;
+    public App() {
+        opciones.put("-msgon", false);
+        opciones.put("-help", false);
+        opciones.put("-logon", false);
 
-		URL url = null;
-		List<String> clasesMain = null;
+        muestraMensajes = false;
+        muestraAyuda = false;
+        generaLog = false;
+    }
 
-		url = getURLfromApp();
-		if (url != null) {
-			// Hay que saber si se esta apuntando a un JAR o no...
-			String protocol = url.getProtocol();
+    public App(String[] args) {
 
-			IO.prtln(false, 1, "protocolo: ", protocol);
+    }
 
-			if ("jar".equalsIgnoreCase(protocol)) {
-				clasesMain = getMainClassesFromJar(url);
-			} else if ("file".equalsIgnoreCase(protocol)) {
-				// Se está ejecutando llamando a la clase desde el iniciador java o dentro de un
-				// IDE...
-				clasesMain = getMainClassesFromApp();
-			}
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        int salida = 0;
 
-			if (clasesMain != null && !clasesMain.isEmpty()) {
-				// Por el momento mostramos las clases que tienen metodo main y no hacemos nada
-				// mas...
-				IO.prtln(true, 1, "");
-				IO.prtln(false, 2, "Listado de clases con metodo main()");
-				for (String claseMain : clasesMain) {
-					IO.prtln(false, 1, claseMain);
-				}
+        App app = new App(args);
+        try {
+            //app.configuraLog();
+            salida = app.ejecutar(args);
+        } catch (Exception ex) {
+            LOG.severe(ex.getLocalizedMessage());
+            throw new RuntimeException(ex.getMessage(), ex);
+        }
+        System.exit(salida);
+    }
 
-				// Obtenemos las instancias class para las nombres de las clases con metodo
-				// main()
-				List<Class<?>> clases = getClassesFromCanonicalNames(clasesMain);
+    /**
+     * 
+     * @param args
+     * @return 
+     */
+    public boolean validar(String[] args) {
+        //FIXME: La validacion no funciona. Hay que repensarlo.
+        boolean esValido = false;
+        if (args != null) {
+            if (args.length >= 1) {
+                for (String arg : args) {
+                    boolean existe = false;
+                    for (Map.Entry<String, Boolean> entry : opciones.entrySet()) {
+                        String key = entry.getKey();
+                        Boolean value = entry.getValue();
+                        if (arg.equalsIgnoreCase(key)) {
+                            existe = true;
+                            entry.setValue(true);
+                            break;
+                        }
+                    }
+                    if (existe == false) {
+                        errores.add("El argumento '" + arg + "' no es valido.");
+                        esValido = false;
+                    }
+                }
+            } else {
+                esValido = true;
+            }
+        } else {
+            muestraMensajes = false;
+            muestraAyuda = false;
+            generaLog = false;
+            esValido = false;
+        }
+        return esValido;
+    }
 
-				if (clases != null && !clases.isEmpty()) {
-					// Obtenemos las instancias de metodos() main de las instancias de clase recién
-					// obtenidas.
-					List<Method> metodosMain = getMainMethodsFromClasses(clases);
+    /**
+     *
+     * @return @throws Exception
+     */
+    public int ejecutar(String[] args) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        int resultado = 0;
 
-					if (metodosMain != null && !metodosMain.isEmpty()) {
-						// Temporalmente vamos a mostrar los contenidos de las instancias Method
-						IO.prtln(true, 1, "");
-						IO.prtln(false, 2, "Listado de instancias de metodos main()");
-						for (Method method : metodosMain) {
-							IO.prtln(false, 1, method.toGenericString());
-						}
-					} else {
-						IO.prtln(false, 2, "Error: no se han encontrado métodos main() en las instancias de clase");
-					}
-				} else {
-					IO.prtln(false, 2, "Error: no se han instancias de clase a partir de sus nombres canonicos");
-				}
-			}
-		} else {
-			IO.prtln(false, 1, "No he encontrado clases con metodo main()");
-			resultado = 1;
-		}
-		return resultado;
-	}
+        if (validar(args) == true) {
+            if (opciones.get("-help") != null && opciones.get("-help") == true) {
+                muestraAyuda();
+                return 0;
+            }
+            configuraLog();
+            URL url = null;
+            List<String> clasesMain = null;
 
-	public URL getURLfromApp() {
-		URL url = null;
-		Thread hiloActual = Thread.currentThread();
+            url = getURLfromApp();
+            if (url != null) {
+                // Hay que saber si se esta apuntando a un JAR o no...
+                String protocol = url.getProtocol();
 
-		IO.prtln(false, 1, "Hilo actual -> ", hiloActual.toString());
-		ClassLoader cl = hiloActual.getContextClassLoader();
-		String nombreClase = this.getClass().getCanonicalName();
-		IO.prtln(false, 1, "Nombre de la clase actual -> ", nombreClase);
-		String rutaClase = nombreClase.replaceAll("\\.", "/");
-		rutaClase = rutaClase + ".class";
-		IO.prtln(false, 1, "Ruta relativa de la clase -> ", rutaClase);
-		url = cl.getResource(rutaClase);
+                sb.append(msgs[0]).append(protocol);
+                show(1, sb.toString());
 
-		if (url != null) {
-			IO.prtln(false, 1, "Objeto URL obtenido con el cargador de clases de contexto -> ", url);
-		} else {
-			IO.prtln(false, 1, "No he podido obtener la URL.");
-		}
-		return url;
-	}
+                if ("jar".equalsIgnoreCase(protocol)) {
+                    clasesMain = getMainClassesFromJar(url);
+                } else if ("file".equalsIgnoreCase(protocol)) {
+                    // Se está ejecutando llamando a la clase desde el iniciador java o dentro de un
+                    // IDE...
+                    clasesMain = getMainClassesFromApp();
+                }
 
-	public List<String> getMainClassesFromJar(URL url) throws Exception {
-		List<String> clasesMain = null;
-		URL jarUrl = null;
-		String path = url.getPath();
-		String spec = path.substring(0, path.indexOf("!"));
+                if (clasesMain != null && !clasesMain.isEmpty()) {
+                    // Por el momento mostramos las clases que tienen metodo main y no hacemos nada
+                    // mas...
+                    show(1, "");
+                    show(2, msgs[1]);
+                    LOG.info(msgs[1]);
+                    for (String claseMain : clasesMain) {
+                        show(1, claseMain);
+                        LOG.info(claseMain);
+                    }
 
-		IO.prtln(false, 1, "spec: ", spec);
+                    // Obtenemos las instancias class para las nombres de las clases con metodo
+                    // main()
+                    List<Class<?>> clases = getClassesFromCanonicalNames(clasesMain);
 
-		try {
-			jarUrl = new URL(spec);
-		} catch (MalformedURLException ex) {
-			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-			throw new Exception(ex.getMessage(), ex);
-		}
-		JarClassLoader jcl = new JarClassLoader(jarUrl);
-		List<String> todasLasClases = jcl.getAllClassesInJar();
-		clasesMain = jcl.getClassesWithMainMethod(todasLasClases);
-		jcl.close();
-		return clasesMain;
-	}
+                    if (clases != null && !clases.isEmpty()) {
+                        // Obtenemos las instancias de metodos() main de las instancias de clase recién
+                        // obtenidas.
+                        List<Method> metodosMain = getMainMethodsFromClasses(clases);
 
-	public List<String> getMainClassesFromApp() {
-		List<String> clasesMain = null;
-		Collection<Class<?>> clases = null;
+                        if (metodosMain != null && !metodosMain.isEmpty()) {
+                            // Temporalmente vamos a mostrar los contenidos de las instancias Method
+                            show(1, "");
+                            show(2, msgs[2]);
+                            for (Method method : metodosMain) {
+                                show(1, method.toGenericString());
+                            }
+                        } else {
+                            show(2, msgs[3]);
+                        }
+                    } else {
+                        show(2, msgs[4]);
+                    }
+                }
+            } else {
+                show(1, msgs[5]);
+                resultado = -1;
+            }
+        } else {
+            muestraErrores(errores);
+            resultado = -1;
+        }
+        return resultado;
+    }
 
-		String nombreClase = this.getClass().getCanonicalName();
+    public URL getURLfromApp() {
+        URL url = null;
+        Thread hiloActual = Thread.currentThread();
 
-		String nombrePaquete = nombreClase.substring(0, nombreClase.indexOf("."));
+        show(1, msgs[6] + hiloActual.toString());
+        ClassLoader cl = hiloActual.getContextClassLoader();
+        String nombreClase = this.getClass().getCanonicalName();
+        show(1, msgs[7] + nombreClase);
+        String rutaClase = nombreClase.replaceAll("\\.", "/");
+        rutaClase = rutaClase + ".class";
+        show(1, msgs[8] + rutaClase);
+        url = cl.getResource(rutaClase);
 
-		IO.prtln(false, 1, "Nombre del paquete : ", nombrePaquete);
+        if (url != null) {
+            show(1, msgs[9] + url);
+        } else {
+            show(1, msgs[10]);
+        }
+        return url;
+    }
 
-		try {
-			clases = ReflexionUtil.dameClasesEnPaquete(nombrePaquete);
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-		}
+    public List<String> getMainClassesFromJar(URL url) throws Exception {
+        List<String> clasesMain = null;
+        URL jarUrl = null;
+        String path = url.getPath();
+        String spec = path.substring(0, path.indexOf("!"));
 
-		if (clases != null && !clases.isEmpty()) {
-			clasesMain = new ArrayList<>();
-			for (Class<?> clase : clases) {
-				try {
-					if (ReflexionUtil.contieneMetodoMain(clase)) {
-						clasesMain.add(clase.getCanonicalName());
-					}
-				} catch (Exception ex) {
-					Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-				}
+        show(1, msgs[11] + spec);
 
-			}
-		}
-		return clasesMain;
-	}
+        try {
+            jarUrl = new URL(spec);
+        } catch (MalformedURLException ex) {
+            LOG.severe(ex.getMessage());
+            throw new Exception(ex.getMessage(), ex);
+        }
+        JarClassLoader jcl = new JarClassLoader(jarUrl);
+        List<String> todasLasClases = jcl.getAllClassesInJar();
+        clasesMain = jcl.getClassesWithMainMethod(todasLasClases);
+        jcl.close();
+        return clasesMain;
+    }
 
-	/**
-	 * 
-	 * @param nombresClases
-	 * @return
-	 * @throws Exception
-	 */
-	public List<Class<?>> getClassesFromCanonicalNames(List<String> nombresClases) throws Exception {
-		ArrayList<Class<?>> clases = null;
+    public List<String> getMainClassesFromApp() {
+        List<String> clasesMain = null;
+        Collection<Class<?>> clases = null;
 
-		if (nombresClases != null && !nombresClases.isEmpty()) {
-			clases = new ArrayList<Class<?>>();
-			for (String nombreClase : nombresClases) {
-				Class<?> clase = Class.forName(nombreClase);
-				if (clase != null) {
-					clases.add(clase);
-				}
-			}
-		}
+        String nombreClase = this.getClass().getCanonicalName();
 
-		return clases;
-	}
+        String nombrePaquete = nombreClase.substring(0, nombreClase.indexOf("."));
 
-	/**
-	 * 
-	 * @param clases
-	 * @return
-	 * @throws NoSuchMethodException
-	 * @throws SecurityException
-	 */
-	public List<Method> getMainMethodsFromClasses(List<Class<?>> clases)
-			throws NoSuchMethodException, SecurityException {
-		List<Method> metodosMain = null;
-		if (clases != null && !clases.isEmpty()) {
-			metodosMain = new ArrayList<Method>();
-			for (Class<?> clase : clases) {
-				Method main = clase.getMethod("main", String[].class);
-				metodosMain.add(main);
-			}
-		}
-		return metodosMain;
-	}
+        show(1, msgs[12] + nombrePaquete);
 
-	public void configuraLog() throws SecurityException, IOException {
-		// creando manejador de archivo
-		FileHandler fh = new FileHandler(RUTALOG + "app%g.log", // patron
-				10485760, // limite
-				3, // contador
-				true); // se agrega
-		fh.setLevel(Level.ALL); // nivel
-		fh.setFormatter(new SimpleFormatter()); // formateador
+        try {
+            clases = ReflexionUtil.dameClasesEnPaquete(nombrePaquete);
+        } catch (FileNotFoundException ex) {
+            LOG.severe(ex.getMessage());
+        }
 
-		// agregar el manejador de archivo al log
-		Logger.getGlobal().addHandler(fh);
+        if (clases != null && !clases.isEmpty()) {
+            clasesMain = new ArrayList<>();
+            for (Class<?> clase : clases) {
+                try {
+                    if (ReflexionUtil.contieneMetodoMain(clase)) {
+                        clasesMain.add(clase.getCanonicalName());
+                    }
+                } catch (Exception ex) {
+                    LOG.severe(ex.getMessage());
+                }
+            }
+        }
+        return clasesMain;
+    }
 
-		// el manejador de consola se agrega automaticamente, solo
-		// cambiamos el nivel de detalle a desplegar
-		Logger.getGlobal().getHandlers()[0].setLevel(Level.OFF);
+    /**
+     *
+     * @param nombresClases
+     * @return
+     * @throws Exception
+     */
+    public List<Class<?>> getClassesFromCanonicalNames(List<String> nombresClases) throws Exception {
+        ArrayList<Class<?>> clases = null;
 
-		// se establece el nivel predeterminado global
-		Logger.getGlobal().setLevel(Level.ALL);
-	}
+        if (nombresClases != null && !nombresClases.isEmpty()) {
+            clases = new ArrayList<>();
+            for (String nombreClase : nombresClases) {
+                Class<?> clase = Class.forName(nombreClase);
+                if (clase != null) {
+                    clases.add(clase);
+                }
+            }
+        }
+
+        return clases;
+    }
+
+    /**
+     *
+     * @param clases
+     * @return
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     */
+    public List<Method> getMainMethodsFromClasses(List<Class<?>> clases)
+            throws NoSuchMethodException, SecurityException {
+        List<Method> metodosMain = null;
+        if (clases != null && !clases.isEmpty()) {
+            metodosMain = new ArrayList<>();
+            for (Class<?> clase : clases) {
+                Method main = clase.getMethod("main", String[].class);
+                metodosMain.add(main);
+            }
+        }
+        return metodosMain;
+    }
+
+    public void configuraLog() throws SecurityException, IOException {
+        System.setProperty("java.util.logging.SimpleFormatter.format",
+                "[%1$tF %1$tT] [%4$-7s] %2$s %5$s %n");
+
+        SimpleFormatter sf = new SimpleFormatter();
+
+        // creando manejador de archivo
+        FileHandler fh = new FileHandler(RUTALOG + "app%u.%g.log", // patron
+                10485760, // limite
+                3, // contador
+                true); // se agrega
+        fh.setLevel(Level.ALL); // nivel
+        fh.setFormatter(sf); // formateador
+
+        // creando manejador de consola para el logger actual
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setLevel(Level.OFF); // se desactiva para todos los niveles.
+        ch.setFormatter(sf); // se asigna el mismo formateador
+
+        LOG.addHandler(fh);
+        LOG.addHandler(ch);
+
+        if (opciones.get("-logon") == true) {
+            LOG.setLevel(Level.ALL);
+        } else {
+            LOG.setLevel(Level.OFF);
+        }
+
+        show(1, "Manejadores registrados en el Logger Global");
+        LOG.info("Manejadores registrados en el Logger Global");
+        for (Handler handler : Logger.getGlobal().getHandlers()) {
+            LOG.log(Level.INFO, "{0}{1}", new Object[]{IO.repiteCaracter('\t', 1),
+                handler.getClass().getCanonicalName()});
+            show(1, IO.repiteCaracter('\t', 1) + handler.getClass().getCanonicalName());
+        }
+
+        show(1, "Manejadores registrados en el Logger " + LOG.getName());
+        LOG.log(Level.INFO, "Manejadores registrados en el Logger {0}", LOG.getName());
+        for (Handler handler : LOG.getHandlers()) {
+            LOG.log(Level.INFO, "{0}{1}", new Object[]{IO.repiteCaracter('\t', 1),
+                handler.getClass().getCanonicalName()});
+            show(1, IO.repiteCaracter('\t', 1) + handler.getClass().getCanonicalName());
+        }
+
+        LOG.info("El log se guarda en " + RUTALOG);
+    }
+
+    private void show(int sl, String msg) {
+        if (opciones.get("-msgon") == true) {
+            IO.prtln(false, sl, msg);
+        }
+    }
+
+    private void muestraAyuda() {
+        IO.prtln(false, 1, "Programa para pruebas");
+        IO.prtln(false, 1, "Sintaxis:");
+        IO.prtln(false, 2, "PRG [-msgon] [-help] [-logon]");
+        IO.prtln(false, 1, "Parámetros: ");
+        IO.prtln(false, 1, "-msgon: Muestra mensajes depuracion por pantalla.");
+        IO.prtln(false, 1, "-help: Muestra la ayuda de este programa");
+        IO.prtln(false, 1, "-logon: Genera trazas de este programa");
+    }
+
+    private void muestraErrores(List<String> errores) {
+        if (errores != null && !errores.isEmpty()){
+            for (String error: errores){
+                IO.prtln(false, 1, error);
+            }
+        }
+    }
 }

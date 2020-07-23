@@ -27,8 +27,8 @@
     </dependency>
 
     <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>javax.mail-api</artifactId>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
       <version>1.6.2</version>
     </dependency>
   </dependencies>
@@ -83,6 +83,19 @@
       </plugins>
     </pluginManagement>
     <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <executions>
+              <execution>
+                  <configuration>
+                      <verbose>true</verbose>
+                      <fork>true</fork>
+                      <compilerVersion>1.8</compilerVersion>
+                  </configuration>
+              </execution>
+          </executions>
+        </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -145,6 +158,13 @@
             </filter>
           </filters>
         </configuration>
+      </plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+              <argLine>-Dfile.encoding=UTF-8</argLine>
+          </configuration>
       </plugin>
     </plugins>
 
