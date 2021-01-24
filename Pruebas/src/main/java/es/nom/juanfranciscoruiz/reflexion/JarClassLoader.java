@@ -144,11 +144,10 @@ public class JarClassLoader extends URLClassLoader {
 		    	Class<?> clazz = null;
 		    	try {
 		    		clazz = Class.forName(clase);
-				} catch (ClassNotFoundException e) {
+				} catch (ClassNotFoundException | NoClassDefFoundError e) {
 					// No se encuentra la clase, ignoramos y NO guardamos 
-				} catch (NoClassDefFoundError e) {
-					// No se encuentra la definición de la clase, ignoramos y NO guardamos 
 				}
+                // No se encuentra la definición de la clase, ignoramos y NO guardamos
 		        if (clazz != null) {
 		        	Method[] metodosDeclarados = clazz.getDeclaredMethods();
 			        for (Method m : metodosDeclarados) {
