@@ -1,47 +1,55 @@
-package es.nom.juanfranciscoruiz.pruebas.graficos;
+package es.nom.juanfranciscoruiz.graficos;
 
+/**
+ * This test shows the different buffer capabilities for each
+ * GraphicsConfiguration on each GraphicsDevice.
+ */
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+ 
 /**
  * This class wraps a graphics configuration so that it can be displayed nicely in components.
  */
 class GCWrapper {
  
-    private GraphicsConfiguration gc;
-    private int index;
+    private final GraphicsConfiguration gc;
  
     public GCWrapper(GraphicsConfiguration gc, int index) {
         this.gc = gc;
-        this.index = index;
     }
  
     public GraphicsConfiguration getGC() {
         return gc;
     }
  
+    @Override
     public String toString() {
         return gc.toString();
     }
 }
-
-public class CapabilitiesTest {
-    private JComboBox gcSelection = new JComboBox();
-    private JCheckBox imageAccelerated = new JCheckBox("Accelerated", false);
-    private JCheckBox imageTrueVolatile = new JCheckBox("Volatile", false);
-    private JCheckBox flipping = new JCheckBox("Flipping", false);
-    private JLabel flippingMethod = new JLabel("");
-    private JCheckBox fullScreen = new JCheckBox("Full Screen Only", false);
-    private JCheckBox multiBuffer = new JCheckBox("Multi-Buffering", false);
-    private JCheckBox fbAccelerated = new JCheckBox("Accelerated", false);
-    private JCheckBox fbTrueVolatile = new JCheckBox("Volatile", false);
-    private JCheckBox bbAccelerated = new JCheckBox("Accelerated", false);
-    private JCheckBox bbTrueVolatile = new JCheckBox("Volatile", false);
+ 
+/**
+ * Main frame class.
+ */
+public class CapabilitiesTest extends JFrame implements ItemListener {
+ 
+    private final JComboBox gcSelection = new JComboBox();
+    private final JCheckBox imageAccelerated = new JCheckBox("Accelerated", false);
+    private final JCheckBox imageTrueVolatile = new JCheckBox("Volatile", false);
+    private final JCheckBox flipping = new JCheckBox("Flipping", false);
+    private final JLabel flippingMethod = new JLabel("");
+    private final JCheckBox fullScreen = new JCheckBox("Full Screen Only", false);
+    private final JCheckBox multiBuffer = new JCheckBox("Multi-Buffering", false);
+    private final JCheckBox fbAccelerated = new JCheckBox("Accelerated", false);
+    private final JCheckBox fbTrueVolatile = new JCheckBox("Volatile", false);
+    private final JCheckBox bbAccelerated = new JCheckBox("Accelerated", false);
+    private final JCheckBox bbTrueVolatile = new JCheckBox("Volatile", false);
  
     public CapabilitiesTest(GraphicsDevice dev) {
         super(dev.getDefaultConfiguration());
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent ev) {
                 System.exit(0);
             }
@@ -155,6 +163,7 @@ public class CapabilitiesTest {
         bbTrueVolatile.setEnabled(false);
     }
  
+    @Override
     public void itemStateChanged(ItemEvent ev) {
         gcChanged();
     }
@@ -203,8 +212,8 @@ public class CapabilitiesTest {
         GraphicsEnvironment ge
                 = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice[] devices = ge.getScreenDevices();
-        for (int i = 0; i < devices.length; i++) {
-            CapabilitiesTest tst = new CapabilitiesTest(devices[i]);
+        for (GraphicsDevice device : devices) {
+            CapabilitiesTest tst = new CapabilitiesTest(device);
             tst.pack();
             tst.setVisible(true);
         }

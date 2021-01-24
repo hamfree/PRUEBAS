@@ -1,5 +1,8 @@
 package es.nom.juanfranciscoruiz.inicio;
 
+import es.nom.juanfranciscoruiz.consola.IO;
+import es.nom.juanfranciscoruiz.reflexion.JarClassLoader;
+import es.nom.juanfranciscoruiz.reflexion.ReflexionUtil;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -7,19 +10,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-
-import es.nom.juanfranciscoruiz.consola.IO;
-import es.nom.juanfranciscoruiz.reflexion.JarClassLoader;
-import es.nom.juanfranciscoruiz.reflexion.ReflexionUtil;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
 
 /**
  * Clase principal de la aplicacion, desde la que se obtienen dinamicamente el
@@ -33,12 +32,18 @@ import java.util.logging.Handler;
  * después,cuando finalize, se le mostrará al usuario un mensaje en pantalla
  * indicandole que pulse [INTRO] para volver al menú. En el menú habrá una
  * opción para terminar el programa.
+ * 
+ * TODO: Extraer los metodos comunes a un interfaz y hacer que la clases App
+ * implementen esa interfaz mediante una nueva clase AppImpl
  *
  * @author hamfree
  */
 public class App {
-
-    private final String RUTALOG = "C:\\des\\data\\log\\";
+    //TODO Pasar la ruta de logs a un properties
+    // Para FILEMON
+    //private final String RUTALOG = "C:\\des\\data\\log\\";
+    // Para ELSUPER
+    private final String RUTALOG = "D:\\des\\data\\log\\";
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private String[] msgs = {
         "Protocolo -> ",
@@ -59,22 +64,12 @@ public class App {
     private Map<String, Boolean> opciones = new Hashtable<>();
     private List<String> errores = new ArrayList<>();
 
-    private boolean muestraMensajes;
-    private boolean muestraAyuda;
-    private boolean generaLog;
-
     public App() {
-        opciones.put("-msgon", false);
-        opciones.put("-help", false);
-        opciones.put("-logon", false);
-
-        muestraMensajes = false;
-        muestraAyuda = false;
-        generaLog = false;
+        iniciaOpciones();
     }
 
     public App(String[] args) {
-
+        iniciaOpciones();
     }
 
     /**
@@ -95,40 +90,32 @@ public class App {
     }
 
     /**
-     * 
+     *
      * @param args
-     * @return 
+     * @return
      */
     public boolean validar(String[] args) {
         //FIXME: La validacion no funciona. Hay que repensarlo.
         boolean esValido = false;
         if (args != null) {
-            if (args.length >= 1) {
+            if (args.length > 0) {
                 for (String arg : args) {
                     boolean existe = false;
                     for (Map.Entry<String, Boolean> entry : opciones.entrySet()) {
                         String key = entry.getKey();
-                        Boolean value = entry.getValue();
                         if (arg.equalsIgnoreCase(key)) {
                             existe = true;
                             entry.setValue(true);
-                            break;
                         }
                     }
                     if (existe == false) {
                         errores.add("El argumento '" + arg + "' no es valido.");
-                        esValido = false;
+                        return false;
                     }
                 }
-            } else {
                 esValido = true;
-            }
-        } else {
-            muestraMensajes = false;
-            muestraAyuda = false;
-            generaLog = false;
-            esValido = false;
-        }
+            } 
+        } 
         return esValido;
     }
 
@@ -186,12 +173,18 @@ public class App {
                         List<Method> metodosMain = getMainMethodsFromClasses(clases);
 
                         if (metodosMain != null && !metodosMain.isEmpty()) {
-                            // Temporalmente vamos a mostrar los contenidos de las instancias Method
+                            //TODO
+                            // Si hay metodos main los mostraremos por pantalla y los asociamos
+                            // a un numero para que el usuario seleccione que metodo ejecutar.
+                            // Nota: Tener en cuenta la paginacion
                             show(1, "");
                             show(2, msgs[2]);
-                            for (Method method : metodosMain) {
+                            metodosMain.forEach(method -> {
                                 show(1, method.toGenericString());
-                            }
+                            });
+                            // Aqui va la seleccion del usuario y despues la 
+                            // ejecucion del main() elegido mediante reflexion.
+                            
                         } else {
                             show(2, msgs[3]);
                         }
@@ -389,10 +382,16 @@ public class App {
     }
 
     private void muestraErrores(List<String> errores) {
-        if (errores != null && !errores.isEmpty()){
-            for (String error: errores){
+        if (errores != null && !errores.isEmpty()) {
+            for (String error : errores) {
                 IO.prtln(false, 1, error);
             }
         }
+    }
+
+    private void iniciaOpciones() {
+        opciones.put("-msgon", false);
+        opciones.put("-help", false);
+        opciones.put("-logon", false);
     }
 }

@@ -1,4 +1,4 @@
-package es.nom.juanfranciscoruiz.pruebas.utiles;
+package es.nom.juanfranciscoruiz.beans;
 
 import java.util.List;
 import java.util.Map;
