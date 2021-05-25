@@ -9,8 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <name>pruebas</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <url>http://juanfranciscoruiz.nom.es/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,14 +33,24 @@
     </dependencies>
 
     <build>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+        <pluginManagement>
+            <!-- 
+            bloquear las versiones de los complementos para evitar el uso de los 
+            valores predeterminados de Maven (se puede mover al pom principal) 
+            -->
             <plugins>
-                <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+                <!-- 
+                ciclo de vida clean, 
+                vea https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle 
+                -->
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.1.0</version>
                 </plugin>
-                <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+                <!-- 
+                ciclo de vida predeterminado, empaquetado jar:
+                vea https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging 
+                -->
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.0.2</version>
@@ -71,7 +80,10 @@
                     <artifactId>maven-shade-plugin</artifactId>
                     <version>2.3</version>
                 </plugin>
-                <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+                <!-- 
+                ciclo de vida site, 
+                vea https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle 
+                -->
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.7.1</version>
@@ -122,7 +134,16 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--Genera un JAR EJECUTABLE + DIRECTORIO LIB en el directorio "target" 
+            
+            <!--
+            Existen dos formas de generar el ejecutable en este pom. Elegimos 
+            una de ellas.
+            -->
+            <!--
+             Genera un JAR EJECUTABLE + DIRECTORIO LIB en el 
+             directorio "target"  
+            -->
+            <!--
             <plugin> 
               <groupId>org.apache.maven.plugins</groupId> 
               <artifactId>maven-jar-plugin</artifactId>
@@ -138,7 +159,10 @@
             </plugin> 
             -->
       
-            <!-- Genera UN ÚNICO JAR EJECUTABLE con las librerías incluídas dentro en el directorio 'target' -->
+            <!-- 
+            Genera UN ÚNICO JAR EJECUTABLE con las librerías incluídas dentro en 
+            el directorio 'target' 
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -177,7 +201,5 @@
                 </configuration>
             </plugin>
         </plugins>
-
-
     </build>
 </project>
