@@ -10,7 +10,7 @@ import javax.persistence.Id;
  *
  * @author hamfree
  */
-@Entity
+@Entity(name = "ejb/NewsEntity")
 public class NewsEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,10 +58,7 @@ public class NewsEntity implements Serializable {
             return false;
         }
         NewsEntity other = (NewsEntity) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
