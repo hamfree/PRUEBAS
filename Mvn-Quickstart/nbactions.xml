@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>run</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:3.0.0:exec</goal>
+            </goals>
+            <properties>
+                <exec.vmArgs></exec.vmArgs>
+                <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+                <exec.appArgs></exec.appArgs>
+                <exec.mainClass>es.nom.juanfranciscoruiz.app.App</exec.mainClass>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>CUSTOM-compiler help detail</actionName>
+            <displayName>compiler help detail</displayName>
+            <goals>
+                <goal>org.apache.maven.plugins:maven-compiler-plugin:3.1:help</goal>
+            </goals>
+            <properties>
+                <detail>true -Dgoal=compile</detail>
+            </properties>
+        </action>
+    </actions>

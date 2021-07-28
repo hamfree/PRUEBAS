@@ -63,12 +63,10 @@ public class PostMessage extends HttpServlet {
                 connection.close();
                 response.sendRedirect("ListNews");
             } catch (JMSException ex) {
-                ex.printStackTrace();
             }
         }
         
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html lang=\"es\">");
@@ -88,8 +86,6 @@ public class PostMessage extends HttpServlet {
             
             out.println("</body>");
             out.println("</html>");
-        } finally {
-            out.close();
         }
     }
 

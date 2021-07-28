@@ -12,13 +12,4 @@
               local="localhost"
               remote="tomcat.apache.org">
     </Resource>
-    <Resource name="mail/Session" auth="Container"
-              type="javax.mail.Session"
-              mail.smtp.starttls.enable="true"
-              mail.smtp.host="smtp.gmail.com"
-              mail.user="singularidad.cuantica@gmail.com"
-              mail.password="melotragotod0"
-              mail.smtp.port="587"
-              mail.smtp.auth="true">
-    </Resource>
 </Context>
