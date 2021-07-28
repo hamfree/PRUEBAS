@@ -9,8 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>pruebaMaven</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://juanfranciscoruiz.nom.es/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,15 +27,21 @@
   </dependencies>
 
   <build>
-    <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <!-- 
+    bloquear las versiones de los complementos para evitar el uso de los valores predeterminados de Maven (se puede 
+    mover al pom principal) 
+    -->
     <pluginManagement>
       <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <!-- ciclo de vida clean, ver https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <!-- 
+        ciclo de vida predeterminado, empaquetado jar: consulte
+        https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging 
+        -->
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
@@ -61,7 +66,7 @@
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
         </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <!-- ciclo de vida, vea https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.7.1</version>
@@ -92,10 +97,7 @@
           </toolchains>
         </configuration>
       </plugin>
-      <!--
-       Genera un JAR EJECUTABLE + DIRECTORIO LIB en el 
-       directorio "target"  
-      -->
+      <!-- Genera un JAR EJECUTABLE + DIRECTORIO LIB en el directorio "target"  -->
       <plugin> 
         <groupId>org.apache.maven.plugins</groupId> 
         <artifactId>maven-jar-plugin</artifactId>
@@ -104,7 +106,7 @@
             <manifest> 
               <addClasspath>true</addClasspath> 
               <classpathPrefix>lib/</classpathPrefix> 
-              <mainClass>es.nom.juanfranciscoruiz.pruebamaven.App</mainClass> 
+              <mainClass>es.nom.juanfranciscoruiz.pruebamaven.inicio.App</mainClass> 
             </manifest> 
           </archive> 
         </configuration> 
