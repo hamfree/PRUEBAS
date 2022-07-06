@@ -43,7 +43,7 @@ public class App {
     // Para FILEMON
     //private final String RUTALOG = "C:\\des\\data\\log\\";
     // Para ELSUPER
-    private final String RUTALOG = "D:\\des\\data\\log\\";
+    private final String RUTALOG = "E:\\des\\data\\log\\";
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private String[] msgs = {
         "Protocolo -> ",
