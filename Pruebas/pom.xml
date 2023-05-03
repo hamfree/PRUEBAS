@@ -13,8 +13,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>20</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -125,7 +125,7 @@
                         <configuration>
                             <verbose>true</verbose>
                             <fork>true</fork>
-                            <compilerVersion>1.8</compilerVersion>
+                            <compilerVersion>20</compilerVersion>
                         </configuration>
                     </execution>
                 </executions>
@@ -155,7 +155,7 @@
              Genera un JAR EJECUTABLE + DIRECTORIO LIB en el 
              directorio "target"  
             -->
-            <!--
+            
             <plugin> 
               <groupId>org.apache.maven.plugins</groupId> 
               <artifactId>maven-jar-plugin</artifactId>
@@ -169,12 +169,12 @@
                 </archive> 
               </configuration> 
             </plugin> 
-            -->
+            
       
             <!-- 
             Genera UN ÚNICO JAR EJECUTABLE con las librerías incluídas dentro en 
             el directorio 'target' 
-            -->
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -203,6 +203,25 @@
                             </excludes>
                         </filter>
                     </filters>
+                </configuration>
+            </plugin>
+            -->
+            <!-- 
+            Plugin para ejecutar el proyecto con Maven
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <executable>c:\\des\\bin\\jdk20\\bin\\java.exe</executable>
+                    <arguments>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>es.nom.juanfranciscoruiz.inicio.App</argument>
+                        <argument>-msgon</argument>
+                        <argument>-logon</argument>
+                    </arguments>
                 </configuration>
             </plugin>
             <plugin>

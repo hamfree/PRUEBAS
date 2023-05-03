@@ -41,9 +41,9 @@ import java.util.logging.SimpleFormatter;
 public class App {
     //TODO Pasar la ruta de logs a un properties
     // Para FILEMON
-    //private final String RUTALOG = "C:\\des\\data\\log\\";
+    private final String RUTALOG = "C:\\des\\data\\log\\";
     // Para ELSUPER
-    private final String RUTALOG = "E:\\des\\data\\log\\";
+    //private final String RUTALOG = "E:\\des\\data\\log\\";
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private String[] msgs = {
         "Protocolo -> ",
