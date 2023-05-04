@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/EjemploMavenAplicacionWeb">
-    <Resource name="bean/MyBeanFactory" auth="Container"
-              type="com.acme.beans.MyBean"
-              factory="org.apache.naming.factory.BeanFactory"
-              bar="23">
+  <Resource auth="Container" bar="23" factory="org.apache.naming.factory.BeanFactory" name="bean/MyBeanFactory" type="com.acme.beans.MyBean">
     </Resource>
-    <Resource name="bean/MyBeanFactory2" auth="Container"
-              type="com.acme.beans.MyBean2"
-              factory="org.apache.naming.factory.BeanFactory"
-              forceString="local,remote=host"
-              local="localhost"
-              remote="tomcat.apache.org">
+  <Resource auth="Container" factory="org.apache.naming.factory.BeanFactory" forceString="local,remote=host" local="localhost" name="bean/MyBeanFactory2" remote="tomcat.apache.org" type="com.acme.beans.MyBean2">
     </Resource>
 </Context>
